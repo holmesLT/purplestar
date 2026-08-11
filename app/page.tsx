@@ -112,7 +112,42 @@ export default function HomePage() {
       </section>
 
       {/* 数据来源 attribution（MIT 要求） */}
-      <footer className="px-6 py-8 max-w-6xl mx-auto text-center border-t border-imperial-gold/20 mt-16">
+      {/* Learn hub — internal linking for SEO */}
+      <section className="px-6 py-16 max-w-6xl mx-auto border-t border-imperial-gold/20">
+        <h2 className="font-display text-3xl md:text-4xl text-center mb-4 text-imperial-gold">
+          Learn Ziwei Doushu
+        </h2>
+        <p className="text-center text-imperial-parchment/70 mb-10 max-w-2xl mx-auto">
+          Eight in-depth guides to read your own chart — palaces, stars, transformations, and how Ziwei compares to other systems.
+        </p>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            { href: '/learn/how-to-read-purple-star-astrology-chart/', title: 'How to Read a Ziwei Chart', tag: 'Beginner' },
+            { href: '/learn/ziwei-doushu-12-palaces-explained/', title: 'The 12 Life Palaces', tag: 'Foundations' },
+            { href: '/learn/ziwei-doushu-14-main-stars/', title: 'The 14 Main Stars', tag: 'Foundations' },
+            { href: '/learn/ziwei-doushu-four-transformations-sihua/', title: 'Four Transformations', tag: 'Core' },
+            { href: '/learn/ziwei-doushu-career-wealth-palace/', title: 'Career & Wealth Palace', tag: 'Practical' },
+            { href: '/learn/ziwei-doushu-vs-bazi/', title: 'Ziwei vs Bazi', tag: 'Comparison' },
+            { href: '/learn/ziwei-doushu-vs-western-astrology/', title: 'Ziwei vs Western Astrology', tag: 'Comparison' },
+            { href: '/learn/is-ziwei-doushu-accurate/', title: 'Is Ziwei Accurate?', tag: 'Honest' },
+          ].map((a) => (
+            <Link
+              key={a.href}
+              href={a.href}
+              className="purple-card rounded-xl p-5 hover:border-imperial-gold transition-colors block"
+            >
+              <div className="text-[10px] tracking-[0.25em] uppercase text-imperial-gold/80 mb-2">
+                {a.tag}
+              </div>
+              <div className="font-serif text-base text-imperial-parchment">
+                {a.title}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <footer className="px-6 py-8 max-w-6xl mx-auto text-center border-t border-imperial-gold/20 mt-4">
         <p className="text-xs text-imperial-parchment/50">
           This project uses the{' '}
           <a
