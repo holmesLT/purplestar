@@ -6,7 +6,11 @@ import Link from 'next/link';
 import ChartGrid from '@/components/ChartGrid';
 import type { ChartResult } from '@/lib/ziwei';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'https://api.purplestar.techhouse.ccwu.cc';
+// Stripe Payment Links (live mode)
+const PAYMENT_LINKS = {
+  basic: 'https://buy.stripe.com/cNi6oHbTZgfs6I3dVwgUM00',
+  premium: 'https://buy.stripe.com/7sY5kD1fl6ES3vR5p0gUM01',
+};
 
 function ChartContent() {
   const searchParams = useSearchParams();
@@ -190,22 +194,12 @@ function PayCard({
   const [loading, setLoading] = useState(false);
 
   async function handleCheckout() {
-    setLoading(true);
+    // 用 sessionStorage 把 chartId 带到 Stripe 跳回后（Payment Link 不支持自定义 metadata）
     try {
-      const res = await fetch(`${API_BASE}/api/checkout`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chartId, tier, chart }),
-      });
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        alert(data.error || 'Checkout failed');
-      }
+      sessionStorage.setItem('pendingChart', JSON.stringify({ chartId, tier }));
+      window.location.href = PAYMENT_LINKS[tier];
     } catch (err: any) {
       alert(err.message);
-    } finally {
       setLoading(false);
     }
   }
