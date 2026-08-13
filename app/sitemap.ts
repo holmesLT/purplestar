@@ -2,7 +2,12 @@ import type { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://purplestar.techhouse.ccwu.cc';
-  const now = new Date();
+
+  // Fixed publication dates — keeps sitemap stable across rebuilds
+  // so Googlebot sees a consistent lastmod per URL.
+  const homepageLastmod = new Date('2026-08-13T00:00:00.000Z');
+  const learnHubLastmod = new Date('2026-08-13T00:00:00.000Z');
+  const articlesLastmod = new Date('2026-08-12T00:00:00.000Z');
 
   const learnPages = [
     { slug: 'ziwei-doushu-vs-bazi', priority: 0.9 },
@@ -18,19 +23,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: baseUrl,
-      lastModified: now,
+      lastModified: homepageLastmod,
       changeFrequency: 'weekly',
       priority: 1.0,
     },
     {
       url: `${baseUrl}/learn`,
-      lastModified: now,
+      lastModified: learnHubLastmod,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     ...learnPages.map(({ slug, priority }) => ({
       url: `${baseUrl}/learn/${slug}/`,
-      lastModified: now,
+      lastModified: articlesLastmod,
       changeFrequency: 'monthly' as const,
       priority,
     })),
