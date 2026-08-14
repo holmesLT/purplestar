@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -33,6 +34,10 @@ export const metadata: Metadata = {
   },
 };
 
+// AdSense Publisher ID — obtained from AdSense account approval.
+// Format: always "ca-pub-XXXXXXXXXXXXXXXX" (ca- prefix required by ads.txt & ad tag).
+const ADSENSE_PUBLISHER_ID = 'ca-pub-9378214644556482';
+
 export default function RootLayout({
   children,
 }: {
@@ -47,8 +52,30 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap"
           rel="stylesheet"
         />
+
+        {/* === Google AdSense Auto Ads === */}
+        {/* Loads the AdSense library. Must be in <head> and use async + crossOrigin="anonymous". */}
+        <Script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}`}
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+
+        {/* === AdSense Auto Ads bootstrap === */}
+        {/* Pushes the page-level ads config. Required for Auto Ads to start placing ads. */}
+        <Script id="adsense-auto-ads" strategy="afterInteractive">
+          {`
+            (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "${ADSENSE_PUBLISHER_ID}",
+              enable_page_level_ads: true
+            });
+          `}
+        </Script>
+      </body>
     </html>
   );
 }
