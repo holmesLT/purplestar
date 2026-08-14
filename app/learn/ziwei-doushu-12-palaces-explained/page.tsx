@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'A complete guide to the 12 palaces in Ziwei Doushu: Life, Wealth, Career, Spouse, Children, Health, Travel, Friends, Property, Fortune, Parents, and Siblings.',
   keywords: ['ziwei 12 palaces', 'life palace ziwei', 'wealth palace career palace ziwei', '12 palaces purple star astrology'],
   openGraph: { title: 'The 12 Life Palaces of Ziwei Doushu', type: 'article' },
-  alternates: { canonical: 'https://purplestar.techhouse.ccwu.cc/learn/ziwei-doushu-12-palaces-explained/' },
+  alternates: { canonical: 'https://purplestar.cc/learn/ziwei-doushu-12-palaces-explained/' },
 };
 
 export default function Article() {

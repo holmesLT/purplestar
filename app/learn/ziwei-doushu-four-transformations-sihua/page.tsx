@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'A complete guide to the Four Transformations (四化) in Ziwei Doushu: 化禄 Lu, 化权 Quan, 化科 Ke, 化忌 Ji. How they activate palaces and shape your life.',
   keywords: ['four transformations ziwei', 'sihua ziwei', 'hua lu hua ji', 'four transformations sihua meaning'],
   openGraph: { title: 'Ziwei Doushu Four Transformations (Sihua)', type: 'article' },
-  alternates: { canonical: 'https://purplestar.techhouse.ccwu.cc/learn/ziwei-doushu-four-transformations-sihua/' },
+  alternates: { canonical: 'https://purplestar.cc/learn/ziwei-doushu-four-transformations-sihua/' },
 };
 
 export default function Article() {

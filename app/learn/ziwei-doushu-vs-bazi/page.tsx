@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     type: 'article',
   },
   alternates: {
-    canonical: 'https://purplestar.techhouse.ccwu.cc/learn/ziwei-doushu-vs-bazi/',
+    canonical: 'https://purplestar.cc/learn/ziwei-doushu-vs-bazi/',
   },
 };
 
@@ -146,7 +146,7 @@ export default function Article() {
         headline: 'Ziwei Doushu vs Bazi: Which Chinese Astrology System Is Right for You?',
         description: 'A detailed comparison of Ziwei Doushu and Bazi Chinese astrology systems.',
         author: { '@type': 'Organization', name: 'PurpleStar' },
-        publisher: { '@type': 'Organization', name: 'PurpleStar', url: 'https://purplestar.techhouse.ccwu.cc' },
+        publisher: { '@type': 'Organization', name: 'PurpleStar', url: 'https://purplestar.cc' },
         datePublished: '2026-08-12',
       }) }} />
     </main>

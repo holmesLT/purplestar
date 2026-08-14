@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'A complete reference for the 14 main stars (主星) of Ziwei Doushu: Ziwei, Tianji, Sun, Wuqu, Tiantong, Lianzheng, Tianfu, Moon, Tanlang, Jumen, Tianxiang, Tianliang, Qisha, Pojun.',
   keywords: ['ziwei 14 main stars', '14 main stars purple star', 'ziwei star meanings', 'tianji wuqu tianfu'],
   openGraph: { title: 'The 14 Main Stars of Ziwei Doushu', type: 'article' },
-  alternates: { canonical: 'https://purplestar.techhouse.ccwu.cc/learn/ziwei-doushu-14-main-stars/' },
+  alternates: { canonical: 'https://purplestar.cc/learn/ziwei-doushu-14-main-stars/' },
 };
 
 export default function Article() {

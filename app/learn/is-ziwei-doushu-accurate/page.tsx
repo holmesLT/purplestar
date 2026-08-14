@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'A critical, evidence-aware discussion of Ziwei Doushu accuracy. How the system works, what it can and cannot tell you, and how to approach a reading responsibly.',
   keywords: ['is ziwei doushu accurate', 'ziwei doushu accuracy', 'does purple star astrology work', 'ziwei doushu scientific'],
   openGraph: { title: 'Is Ziwei Doushu Accurate?', type: 'article' },
-  alternates: { canonical: 'https://purplestar.techhouse.ccwu.cc/learn/is-ziwei-doushu-accurate/' },
+  alternates: { canonical: 'https://purplestar.cc/learn/is-ziwei-doushu-accurate/' },
 };
 
 export default function Article() {

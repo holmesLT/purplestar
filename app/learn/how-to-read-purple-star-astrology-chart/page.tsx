@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: 'A beginner-friendly walkthrough of the Ziwei Doushu birth chart.',
     type: 'article',
   },
-  alternates: { canonical: 'https://purplestar.techhouse.ccwu.cc/learn/how-to-read-purple-star-astrology-chart/' },
+  alternates: { canonical: 'https://purplestar.cc/learn/how-to-read-purple-star-astrology-chart/' },
 };
 
 export default function Article() {

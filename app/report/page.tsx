@@ -4,7 +4,7 @@ import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'https://api.purplestar.techhouse.ccwu.cc';
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'https://api.purplestar.cc';
 
 function ReportContent() {
   const searchParams = useSearchParams();

@@ -168,7 +168,7 @@ function hourToZhi(hour: number): string {
   return zhis[Math.floor((hour + 1) / 2) % 12];
 }
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'https://api.purplestar.techhouse.ccwu.cc';
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'https://api.purplestar.cc';
 
 /**
  * 把 chart 存到 Workers D1（让付费时后端能读到）

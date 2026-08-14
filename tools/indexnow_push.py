@@ -24,7 +24,7 @@ from datetime import datetime
 # 配置
 # ============================================================
 INDEXNOW_KEY = "5a6d3b2fd71e485397beb74b986adccc"  # 32 位十六进制 key
-HOST = "purplestar.techhouse.ccwu.cc"
+HOST = "purplestar.cc"
 KEY_LOCATION = f"https://{HOST}/{INDEXNOW_KEY}.txt"
 
 # ============================================================
@@ -79,7 +79,7 @@ def push_to_indexnow() -> int:
             print()
             print("📊 预期效果:")
             print("   • Bing: 1 小时内开始抓取(原本要 7-30 天)")
-            print("   • 24-48 小时后可在 Bing 搜索 site:purplestar.techhouse.ccwu.cc 看到")
+            print("   • 24-48 小时后可在 Bing 搜索 site:purplestar.cc 看到")
             print("   • 7 天后检查 Bing Webmaster → IndexNow 工具的 URL 提交历史")
             return status
     except urllib.error.HTTPError as e:

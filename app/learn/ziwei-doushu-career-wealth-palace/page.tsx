@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'How to read the Career Palace (官禄) and Wealth Palace (财帛) in your Ziwei Doushu chart. Discover what stars mean for your vocation and financial destiny.',
   keywords: ['career palace ziwei', 'wealth palace ziwei', 'ziwei career reading', 'ziwei money palace'],
   openGraph: { title: 'Ziwei Doushu Career and Wealth Palace', type: 'article' },
-  alternates: { canonical: 'https://purplestar.techhouse.ccwu.cc/learn/ziwei-doushu-career-wealth-palace/' },
+  alternates: { canonical: 'https://purplestar.cc/learn/ziwei-doushu-career-wealth-palace/' },
 };
 
 export default function Article() {

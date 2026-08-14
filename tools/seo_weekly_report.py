@@ -21,7 +21,7 @@ from pathlib import Path
 REPORT_DIR = Path(__file__).parent.parent / "seo-reports"
 REPORT_DIR.mkdir(exist_ok=True)
 
-SITE_URL = "https://purplestar.techhouse.ccwu.cc"
+SITE_URL = "https://purplestar.cc"
 
 # ============================================================
 # GSC 配置(可选 - 需要 Google Search Console API 凭证)
