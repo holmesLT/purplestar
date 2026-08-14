@@ -23,7 +23,7 @@ from datetime import datetime
 # ============================================================
 # 配置
 # ============================================================
-INDEXNOW_KEY = "REPLACE_ME_WITH_YOUR_KEY"  # 从 bing.com/indexnow/getkey 生成
+INDEXNOW_KEY = "5a6d3b2fd71e485397beb74b986adccc"  # 32 位十六进制 key
 HOST = "purplestar.techhouse.ccwu.cc"
 KEY_LOCATION = f"https://{HOST}/{INDEXNOW_KEY}.txt"
 

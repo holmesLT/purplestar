@@ -4,7 +4,7 @@
 
 import Script from 'next/script';
 
-const INDEXNOW_KEY = 'REPLACE_ME_WITH_YOUR_KEY';
+const INDEXNOW_KEY = '5a6d3b2fd71e485397beb74b986adccc';
 const HOST = 'purplestar.techhouse.ccwu.cc';
 
 const URLS_TO_PING = [
