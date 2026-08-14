@@ -53,6 +53,9 @@ export default function RootLayout({
           rel="stylesheet"
         />
 
+        {/* === Bing Webmaster Verification === */}
+        <meta name="msvalidate.01" content="EA4AEB907241507BA48762B36249A64C" />
+
         {/* === Google AdSense Auto Ads === */}
         {/* Loads the AdSense library. Must be in <head> and use async + crossOrigin="anonymous". */}
         <Script
