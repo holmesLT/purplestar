@@ -53,7 +53,13 @@ function ReportContent() {
             body: JSON.stringify({ chart: chartData, tier, sessionId }),
           });
           if (r.ok) return await r.json();
-          lastErr = new Error(`Server returned ${r.status}`);
+          // 尝试解析 worker 返回的 JSON 错误体,把真实原因带回来
+          let detail = `Server returned ${r.status}`;
+          try {
+            const body = await r.json();
+            if (body?.error) detail = body.error;
+          } catch {}
+          lastErr = new Error(detail);
         } catch (e: any) {
           lastErr = new Error(`${base}: ${e.message}`);
         }
