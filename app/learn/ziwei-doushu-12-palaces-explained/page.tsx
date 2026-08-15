@@ -108,6 +108,36 @@ export default function Article() {
           <li><Link href="/learn/ziwei-doushu-four-transformations-sihua/" className="hover:text-imperial-gold">Four Transformations (Sihua)</Link></li>
         </ul>
       </article>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'TechArticle',
+        headline: 'The 12 Life Palaces of Ziwei Doushu Explained',
+        description: 'A complete guide to the 12 palaces in Ziwei Doushu: Life, Wealth, Career, Spouse, Children, Health, Travel, Friends, Property, Fortune, Parents, and Siblings.',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': 'https://purplestar.cc/learn/ziwei-doushu-12-palaces-explained/',
+        },
+        url: 'https://purplestar.cc/learn/ziwei-doushu-12-palaces-explained/',
+        datePublished: '2026-08-12',
+        dateModified: '2026-08-15',
+        author: {
+          '@type': 'Organization',
+          name: 'PurpleStar',
+          url: 'https://purplestar.cc',
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'PurpleStar',
+          url: 'https://purplestar.cc',
+        },
+        keywords: '12 palaces ziwei doushu, life palace, wealth palace, career palace, purple star astrology',
+        inLanguage: 'en-US',
+        about: [
+          { '@type': 'Thing', name: '12 Life Palaces' },
+          { '@type': 'Thing', name: 'Ziwei Doushu' },
+        ],
+      }) }} />
     </main>
   );
 }

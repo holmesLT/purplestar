@@ -90,6 +90,36 @@ export default function Article() {
           <li><Link href="/learn/how-to-read-purple-star-astrology-chart/" className="hover:text-imperial-gold">How to Read a Ziwei Doushu Chart</Link></li>
         </ul>
       </article>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'TechArticle',
+        headline: 'The 14 Main Stars of Ziwei Doushu: Meanings and Natures',
+        description: 'A complete reference for the 14 main stars (主星) of Ziwei Doushu — their meanings, archetypes, and how to interpret them in your chart.',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': 'https://purplestar.cc/learn/ziwei-doushu-14-main-stars/',
+        },
+        url: 'https://purplestar.cc/learn/ziwei-doushu-14-main-stars/',
+        datePublished: '2026-08-12',
+        dateModified: '2026-08-15',
+        author: {
+          '@type': 'Organization',
+          name: 'PurpleStar',
+          url: 'https://purplestar.cc',
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'PurpleStar',
+          url: 'https://purplestar.cc',
+        },
+        keywords: '14 main stars ziwei doushu, ziwei tianji wuqu tianfu, purple star astrology stars',
+        inLanguage: 'en-US',
+        about: [
+          { '@type': 'Thing', name: '14 Main Stars' },
+          { '@type': 'Thing', name: 'Ziwei Doushu' },
+        ],
+      }) }} />
     </main>
   );
 }

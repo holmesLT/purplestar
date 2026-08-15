@@ -139,10 +139,33 @@ export default function Article() {
       </article>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-        '@context': 'https://schema.org', '@type': 'Article',
-        headline: 'Ziwei Doushu Four Transformations (Sihua)',
+        '@context': 'https://schema.org',
+        '@type': 'TechArticle',
+        headline: 'Ziwei Doushu Four Transformations (Sihua): Lu, Quan, Ke, Ji',
+        description: 'A clear explanation of the Four Transformations in Ziwei Doushu — what they are, how they fly between stars, and how to read them in your chart.',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': 'https://purplestar.cc/learn/ziwei-doushu-four-transformations-sihua/',
+        },
+        url: 'https://purplestar.cc/learn/ziwei-doushu-four-transformations-sihua/',
         datePublished: '2026-08-12',
-        author: { '@type': 'Organization', name: 'PurpleStar' },
+        dateModified: '2026-08-15',
+        author: {
+          '@type': 'Organization',
+          name: 'PurpleStar',
+          url: 'https://purplestar.cc',
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'PurpleStar',
+          url: 'https://purplestar.cc',
+        },
+        keywords: 'four transformations, sihua, lu quan ke ji, ziwei transformations',
+        inLanguage: 'en-US',
+        about: [
+          { '@type': 'Thing', name: 'Four Transformations (Sihua)' },
+          { '@type': 'Thing', name: 'Ziwei Doushu' },
+        ],
       }) }} />
     </main>
   );

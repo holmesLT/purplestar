@@ -107,10 +107,34 @@ export default function Article() {
       </article>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-        '@context': 'https://schema.org', '@type': 'Article',
-        headline: 'Ziwei Doushu vs Western Astrology',
+        '@context': 'https://schema.org',
+        '@type': 'TechArticle',
+        headline: 'Ziwei Doushu vs Western Astrology: How Do They Compare?',
+        description: 'A clear comparison of Ziwei Doushu (Purple Star Astrology) and Western astrology — origins, structure, philosophy, and which one to choose for your first reading.',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': 'https://purplestar.cc/learn/ziwei-doushu-vs-western-astrology/',
+        },
+        url: 'https://purplestar.cc/learn/ziwei-doushu-vs-western-astrology/',
         datePublished: '2026-08-12',
-        author: { '@type': 'Organization', name: 'PurpleStar' },
+        dateModified: '2026-08-15',
+        author: {
+          '@type': 'Organization',
+          name: 'PurpleStar',
+          url: 'https://purplestar.cc',
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'PurpleStar',
+          url: 'https://purplestar.cc',
+        },
+        keywords: 'ziwei vs western astrology, purple star vs zodiac, chinese vs western astrology',
+        inLanguage: 'en-US',
+        about: [
+          { '@type': 'Thing', name: 'Ziwei Doushu' },
+          { '@type': 'Thing', name: 'Western Astrology' },
+          { '@type': 'Thing', name: 'Astrology Comparison' },
+        ],
       }) }} />
     </main>
   );

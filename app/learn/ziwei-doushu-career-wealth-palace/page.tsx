@@ -103,6 +103,37 @@ export default function Article() {
           <li><Link href="/learn/ziwei-doushu-four-transformations-sihua/" className="hover:text-imperial-gold">Four Transformations</Link></li>
         </ul>
       </article>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'TechArticle',
+        headline: 'Ziwei Doushu Career and Wealth Palace: How It Shapes Your Money Path',
+        description: 'How to read the Career Palace (官禄) and Wealth Palace (财帛) in your Ziwei Doushu chart — what stars mean for your vocation and financial destiny.',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': 'https://purplestar.cc/learn/ziwei-doushu-career-wealth-palace/',
+        },
+        url: 'https://purplestar.cc/learn/ziwei-doushu-career-wealth-palace/',
+        datePublished: '2026-08-12',
+        dateModified: '2026-08-15',
+        author: {
+          '@type': 'Organization',
+          name: 'PurpleStar',
+          url: 'https://purplestar.cc',
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'PurpleStar',
+          url: 'https://purplestar.cc',
+        },
+        keywords: 'career palace ziwei, wealth palace ziwei, ziwei career reading, money path',
+        inLanguage: 'en-US',
+        about: [
+          { '@type': 'Thing', name: 'Career Palace' },
+          { '@type': 'Thing', name: 'Wealth Palace' },
+          { '@type': 'Thing', name: 'Ziwei Doushu' },
+        ],
+      }) }} />
     </main>
   );
 }

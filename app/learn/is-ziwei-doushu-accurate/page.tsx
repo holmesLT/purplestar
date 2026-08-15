@@ -109,10 +109,33 @@ export default function Article() {
       </article>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-        '@context': 'https://schema.org', '@type': 'Article',
-        headline: 'Is Ziwei Doushu Accurate?',
+        '@context': 'https://schema.org',
+        '@type': 'TechArticle',
+        headline: 'Is Ziwei Doushu Accurate? An Honest Investigation',
+        description: 'A clear-eyed look at what Ziwei Doushu can and cannot predict — based on real testing of structural predictions against three years of life events.',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': 'https://purplestar.cc/learn/is-ziwei-doushu-accurate/',
+        },
+        url: 'https://purplestar.cc/learn/is-ziwei-doushu-accurate/',
         datePublished: '2026-08-12',
-        author: { '@type': 'Organization', name: 'PurpleStar' },
+        dateModified: '2026-08-15',
+        author: {
+          '@type': 'Organization',
+          name: 'PurpleStar',
+          url: 'https://purplestar.cc',
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'PurpleStar',
+          url: 'https://purplestar.cc',
+        },
+        keywords: 'is ziwei doushu accurate, chinese astrology accuracy, purple star astrology review',
+        inLanguage: 'en-US',
+        about: [
+          { '@type': 'Thing', name: 'Ziwei Doushu' },
+          { '@type': 'Thing', name: 'Astrology Accuracy' },
+        ],
       }) }} />
     </main>
   );

@@ -142,12 +142,33 @@ export default function Article() {
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         '@context': 'https://schema.org',
-        '@type': 'Article',
+        '@type': 'TechArticle',
         headline: 'Ziwei Doushu vs Bazi: Which Chinese Astrology System Is Right for You?',
         description: 'A detailed comparison of Ziwei Doushu and Bazi Chinese astrology systems.',
-        author: { '@type': 'Organization', name: 'PurpleStar' },
-        publisher: { '@type': 'Organization', name: 'PurpleStar', url: 'https://purplestar.cc' },
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': 'https://purplestar.cc/learn/ziwei-doushu-vs-bazi/',
+        },
+        url: 'https://purplestar.cc/learn/ziwei-doushu-vs-bazi/',
         datePublished: '2026-08-12',
+        dateModified: '2026-08-15',
+        author: {
+          '@type': 'Organization',
+          name: 'PurpleStar',
+          url: 'https://purplestar.cc',
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'PurpleStar',
+          url: 'https://purplestar.cc',
+        },
+        keywords: 'ziwei doushu vs bazi, chinese astrology comparison, four pillars, purple star astrology',
+        inLanguage: 'en-US',
+        about: [
+          { '@type': 'Thing', name: 'Ziwei Doushu' },
+          { '@type': 'Thing', name: 'Bazi (Four Pillars)' },
+          { '@type': 'Thing', name: 'Chinese Astrology' },
+        ],
       }) }} />
     </main>
   );

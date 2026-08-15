@@ -140,9 +140,33 @@ export default function Article() {
       </article>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-        '@context': 'https://schema.org', '@type': 'Article',
-        headline: 'How to Read a Ziwei Doushu Chart', datePublished: '2026-08-12',
-        author: { '@type': 'Organization', name: 'PurpleStar' },
+        '@context': 'https://schema.org',
+        '@type': 'TechArticle',
+        headline: 'How to Read a Ziwei Doushu Chart: A Step-by-Step Beginner Guide',
+        description: 'A practical walkthrough — from a blank chart to understanding your life themes, in 5 steps.',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': 'https://purplestar.cc/learn/how-to-read-purple-star-astrology-chart/',
+        },
+        url: 'https://purplestar.cc/learn/how-to-read-purple-star-astrology-chart/',
+        datePublished: '2026-08-12',
+        dateModified: '2026-08-15',
+        author: {
+          '@type': 'Organization',
+          name: 'PurpleStar',
+          url: 'https://purplestar.cc',
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'PurpleStar',
+          url: 'https://purplestar.cc',
+        },
+        keywords: 'how to read ziwei chart, ziwei doushu beginner, purple star astrology tutorial',
+        inLanguage: 'en-US',
+        about: [
+          { '@type': 'Thing', name: 'Ziwei Doushu' },
+          { '@type': 'Thing', name: 'Chart Reading' },
+        ],
       }) }} />
     </main>
   );
