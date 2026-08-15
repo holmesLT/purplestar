@@ -116,37 +116,43 @@ export default function RootLayout({
         {children}
 
         {/* === AdSense Auto Ads bootstrap === */}
-        {/* Pushes the page-level ads config. Required for Auto Ads to start placing ads. */}
-        <Script id="adsense-auto-ads" strategy="afterInteractive">
-          {`
-            (adsbygoogle = window.adsbygoogle || []).push({
-              google_ad_client: "${ADSENSE_PUBLISHER_ID}",
-              enable_page_level_ads: true
-            });
-          `}
-        </Script>
+        {/* Pushes the page-level ads config. Required for Auto Ads to start placing ads.
+            Uses native <script> (not next/script) so it runs synchronously during HTML parse
+            and registers adsbygoogle.push before AdSense script finishes loading. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(adsbygoogle = window.adsbygoogle || []).push({ google_ad_client: "${ADSENSE_PUBLISHER_ID}", enable_page_level_ads: true });`,
+          }}
+        />
 
         {/* === Yandex.Metrika counter === */}
         {/* Only renders when NEXT_PUBLIC_YANDEX_METRICA_ID env var is set.
-            Get your counter ID from https://metrica.yandex.com (8-digit number). */}
+            Uses native <script> with dangerouslySetInnerHTML (NOT next/script) because
+            Next.js Script with inline content queues execution behind hydration;
+            we need the metrika loader to run as soon as HTML parses so the page-view
+            hit reaches Yandex before users navigate away. Get your counter ID from
+            https://metrica.yandex.com (8-digit number). */}
         {YANDEX_METRICA_ID && (
           <>
-            <Script id="yandex-metrika" type="text/javascript" strategy="afterInteractive">
-              {`
-                (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-                m[i].l=1*new Date();
-                for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-                k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-                (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+            <script
+              type="text/javascript"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                  m[i].l=1*new Date();
+                  for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+                  k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+                  (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-                ym(${YANDEX_METRICA_ID}, "init", {
-                  clickmap:true,
-                  trackLinks:true,
-                  accurateTrackBounce:true,
-                  webvisor:true
-                });
-              `}
-            </Script>
+                  ym(${YANDEX_METRICA_ID}, "init", {
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true
+                  });
+                `,
+              }}
+            />
             <noscript>
               <div>
                 <img
