@@ -9,7 +9,7 @@
 1. 开；打开 Medium `https://medium.com/journal`。  
 2. 点击 **New story**。  
 3. 复制 `medium-01-...md` 里的完整正文（不含 Markdown 语法)。**注意**：未做阴影；只粘贴正文。  
-4. 右上角三点 → **Story settings**，勾选 **Canonical URL** 并填入对应 slug，例如 `https://purplestar.techhouse.ccwu.cc/learn/how-to-read-purple-star-astrology-chart/`。  
+4. 右上角三点 → **Story settings**，勾选 **Canonical URL** 并填入对应 slug，例如 `https://purplestar.cc/learn/how-to-read-purple-star-astrology-chart/`。  
 5. 置顶 Title、Tags、类别：
    - Title：原始标题（如 `How to Read a Ziwei Doushu Chart: A Step‑by‑Step Guide for Beginners`）
    - Tags：`Chinese Astrology`, `Ziwei Doushu`, `Purple Star Astrology`, `Astrology`, `Self Improvement`
@@ -22,7 +22,7 @@
 1. 打开 `linkedin.com` → **Post** → **Write an article**。
 2. 为每篇文章打开对应的 `linkedin-xx.txt` 文本。
 3. 粘贴正文。顶部先加一句简短摘要，例如 “在这篇文章中，您可以了解如何通过 Ziwei Doushu 读取您自己的星图”。
-4. 末尾添加链接：`Read my free Ziwei chart → https://purplestar.techhouse.ccwu.cc/`。
+4. 末尾添加链接：`Read my free Ziwei chart → https://purplestar.cc/`。
 5. 关键字：`Chinese Astrology`, `Ziwei`, `Personal Development`, `Career`。
 6. 点击 **Publish**。可以选 `Add to your articles` 在个人档案显示。
 
@@ -35,8 +35,8 @@
 pinterest-pin-01.png` 和 `pinterest-pin-02.png`。
 3. 标题：分别为 `The 12 Life Palaces of Ziwei Doushu Explained` 与 `How to Read Your Ziwei Chart in 5 Steps`。
 4. 描述：
-   - 第 1 款：`A quick glance at the 12 life palaces in Ziwei Doushu. Read the full guide here → https://purplestar.techhouse.ccwu.cc/learn/ziwei-doushu-12-palaces-explained/`。
-   - 第 2 款：`Learn the 5️⃣ steps to read your Ziwei Doushu chart. View the full tutorial → https://purplestar.techhouse.ccwu.cc/learn/how-to-read-purple-star-astrology-chart/`。
+   - 第 1 款：`A quick glance at the 12 life palaces in Ziwei Doushu. Read the full guide here → https://purplestar.cc/learn/ziwei-doushu-12-palaces-explained/`。
+   - 第 2 款：`Learn the 5️⃣ steps to read your Ziwei Doushu chart. View the full tutorial → https://purplestar.cc/learn/how-to-read-purple-star-astrology-chart/`。
 5. 选择 Board，然后发布。
 
 > **批量**：如果你熟悉 API，可以使用 `POST https://api.pinterest.com/v1/pins/`，携带 `image_url` 与 `link`。
@@ -46,7 +46,7 @@ pinterest-pin-01.png` 和 `pinterest-pin-02.png`。
 1. 在目标 subreddit 打开一个活跃主题（例如 r/ZodiacAstrology、r/astrology、r/AskAstrologers 等）。
 2. 复制 `reddit-01-...md` 的内容，并粘贴到 **Reply** 文本框。
 3. 只在结尾加上 **(链接)**：`
-   (https://purplestar.techhouse.ccwu.cc/learn/ziwei-doushu-vs-western-astrology/)
+   (https://purplestar.cc/learn/ziwei-doushu-vs-western-astrology/)
 `
 4. 点击提交。
 
@@ -81,7 +81,7 @@ for md_file in Path('C:/AI/purplestar/app').glob('medium-*.md'):
         "title": f"Zidai {slug}",
         "tags": ["Chinese Astrology", "Ziwei Doushu",
                   "Purple Star Astrology", "Astrology", "Self Improvement"],
-        "canonicalUrl": f"https://purplestar.techhouse.ccwu.cc/learn/{slug}/",
+        "canonicalUrl": f"https://purplestar.cc/learn/{slug}/",
         "contentFormat": "html",  # 你可以把 markdown 转 html 先
         "contentValue": body
     }

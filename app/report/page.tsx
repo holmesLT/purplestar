@@ -5,6 +5,12 @@ import { useSearchParams } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'https://api.purplestar.cc';
+// Fallback 链:新域名 DNS 未生效时,自动回落到老域名(过渡期)
+// 客户端先试新域名,失败后试老域名
+const API_FALLBACKS = [
+  API_BASE,
+  'https://api.purplestar.techhouse.ccwu.cc', // 老域名(过渡)
+].filter((v, i, a) => a.indexOf(v) === i); // 去重
 
 function ReportContent() {
   const searchParams = useSearchParams();
@@ -30,19 +36,32 @@ function ReportContent() {
       } catch {}
     }
 
-    // 2) 验证支付 + 生成解读
+    // 2) 验证支付 + 生成解读(支持多 endpoint fallback,过渡期 DNS 不稳时仍可用)
     if (!sessionId) {
       setError('No payment session. Please complete checkout first.');
       setLoading(false);
       return;
     }
 
-    fetch(`${API_BASE}/api/interpret`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chart: chartData, tier, sessionId }),
-    })
-      .then(r => r.ok ? r.json() : Promise.reject(new Error(`Server returned ${r.status}`)))
+    const tryEndpoints = async (): Promise<any> => {
+      let lastErr: Error | null = null;
+      for (const base of API_FALLBACKS) {
+        try {
+          const r = await fetch(`${base}/api/interpret`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chart: chartData, tier, sessionId }),
+          });
+          if (r.ok) return await r.json();
+          lastErr = new Error(`Server returned ${r.status}`);
+        } catch (e: any) {
+          lastErr = new Error(`${base}: ${e.message}`);
+        }
+      }
+      throw lastErr ?? new Error('All endpoints failed');
+    };
+
+    tryEndpoints()
       .then(data => setReading(data.reading))
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
