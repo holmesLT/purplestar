@@ -169,30 +169,20 @@ function hourToZhi(hour: number): string {
 }
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'https://api.purplestar.cc';
-const API_FALLBACKS = [
-  API_BASE,
-  'https://api.purplestar.techhouse.ccwu.cc', // 老域名（过渡期）
-].filter((v, i, a) => a.indexOf(v) === i);
 
 /**
  * 把 chart 存到 Workers D1（让付费时后端能读到）
- * 支持多 endpoint fallback，过渡期 DNS 不稳时仍可用
  */
 export async function saveChartToServer(chart: ChartResult): Promise<void> {
-  let lastErr: Error | null = null;
-  for (const base of API_FALLBACKS) {
-    try {
-      const r = await fetch(`${base}/api/chart/save`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: chart.id, chart }),
-      });
-      if (r.ok) return; // 成功
-      lastErr = new Error(`Chart save failed: ${base} → ${r.status}`);
-    } catch (err: any) {
-      lastErr = new Error(`Chart save failed: ${base} → ${err.message}`);
-    }
+  try {
+    const r = await fetch(`${API_BASE}/api/chart/save`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: chart.id, chart }),
+    });
+    if (!r.ok) console.warn(`Chart save failed: ${r.status}`);
+  } catch (err) {
+    // 静默失败 — 不影响主流程
+    console.warn('Chart save failed:', err);
   }
-  // 全部失败，记录但不抛（避免影响主流程）
-  console.warn('Chart save to all endpoints failed:', lastErr?.message);
 }

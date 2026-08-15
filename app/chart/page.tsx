@@ -12,11 +12,8 @@ const PAYMENT_LINKS = {
   premium: 'https://buy.stripe.com/7sY5kD1fl6ES3vR5p0gUM01',
 };
 
-// API endpoint fallback chain(过渡期 api.purplestar.cc DNS 可能未生效,自动回落到老域名)
-const API_FALLBACKS = [
-  process.env.NEXT_PUBLIC_API_BASE || 'https://api.purplestar.cc',
-  'https://api.purplestar.techhouse.ccwu.cc', // 老域名(过渡)
-].filter((v, i, a) => a.indexOf(v) === i); // 去重
+// API endpoint
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'https://api.purplestar.cc';
 
 function ChartContent() {
   const searchParams = useSearchParams();
@@ -43,22 +40,12 @@ function ChartContent() {
       } catch {}
     }
 
-    // 2) 兜底：从 API 取(支持多 endpoint fallback)
-    const tryFetchChart = async (): Promise<any> => {
-      let lastErr: Error | null = null;
-      for (const base of API_FALLBACKS) {
-        try {
-          const r = await fetch(`${base}/api/chart/${chartId}`);
-          if (r.ok) return await r.json();
-          lastErr = new Error(`Chart not found (${base})`);
-        } catch (e: any) {
-          lastErr = new Error(`${base}: ${e.message}`);
-        }
-      }
-      throw lastErr ?? new Error('All endpoints failed');
-    };
-
-    tryFetchChart()
+    // 从 API 取
+    fetch(`${API_BASE}/api/chart/${chartId}`)
+      .then(r => {
+        if (!r.ok) throw new Error(`Chart not found (${r.status})`);
+        return r.json();
+      })
       .then(data => setChart(data))
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));

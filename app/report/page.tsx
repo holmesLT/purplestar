@@ -5,12 +5,6 @@ import { useSearchParams } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'https://api.purplestar.cc';
-// Fallback 链:新域名 DNS 未生效时,自动回落到老域名(过渡期)
-// 客户端先试新域名,失败后试老域名
-const API_FALLBACKS = [
-  API_BASE,
-  'https://api.purplestar.techhouse.ccwu.cc', // 老域名(过渡)
-].filter((v, i, a) => a.indexOf(v) === i); // 去重
 
 function ReportContent() {
   const searchParams = useSearchParams();
@@ -43,31 +37,22 @@ function ReportContent() {
       return;
     }
 
-    const tryEndpoints = async (): Promise<any> => {
-      let lastErr: Error | null = null;
-      for (const base of API_FALLBACKS) {
-        try {
-          const r = await fetch(`${base}/api/interpret`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chart: chartData, chartId, tier, sessionId }),
+    fetch(`${API_BASE}/api/interpret`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chart: chartData, chartId, tier, sessionId }),
+    })
+      .then(r => {
+        if (!r.ok) {
+          // 解析 worker 返回的 JSON 错误体,把真实原因带回来
+          return r.json().then(body => {
+            throw new Error(body?.error || `Server returned ${r.status}`);
+          }).catch(() => {
+            throw new Error(`Server returned ${r.status}`);
           });
-          if (r.ok) return await r.json();
-          // 尝试解析 worker 返回的 JSON 错误体,把真实原因带回来
-          let detail = `Server returned ${r.status}`;
-          try {
-            const body = await r.json();
-            if (body?.error) detail = body.error;
-          } catch {}
-          lastErr = new Error(detail);
-        } catch (e: any) {
-          lastErr = new Error(`${base}: ${e.message}`);
         }
-      }
-      throw lastErr ?? new Error('All endpoints failed');
-    };
-
-    tryEndpoints()
+        return r.json();
+      })
       .then(data => setReading(data.reading))
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
