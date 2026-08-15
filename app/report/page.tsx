@@ -26,7 +26,7 @@ function ReportContent() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // 1) 从 URL hash 取 chart（如果用户在生成页面跳转过来）
+    // 1) 从 URL hash 取 chart（hash 跳转能塞下完整 chart 数据,避免再查 D1）
     const hash = window.location.hash.replace(/^#/, '');
     let chartData: any = null;
     if (hash) {
@@ -50,7 +50,7 @@ function ReportContent() {
           const r = await fetch(`${base}/api/interpret`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chart: chartData, tier, sessionId }),
+            body: JSON.stringify({ chart: chartData, chartId, tier, sessionId }),
           });
           if (r.ok) return await r.json();
           // 尝试解析 worker 返回的 JSON 错误体,把真实原因带回来
@@ -71,7 +71,7 @@ function ReportContent() {
       .then(data => setReading(data.reading))
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
-  }, [tier, sessionId]);
+  }, [tier, sessionId, chartId]);
 
   if (loading) {
     return (
