@@ -16,9 +16,13 @@ export const metadata: Metadata = {
 export default function Article() {
   return (
     <main className="min-h-screen px-6 py-12 max-w-4xl mx-auto">
-      <div className="mb-6">
-        <Link href="/" className="text-imperial-gold hover:underline text-sm">← PurpleStar Home</Link>
-      </div>
+      <nav aria-label="Breadcrumb" className="mb-6 text-sm text-imperial-parchment/60">
+        <Link href="/" className="text-imperial-gold hover:underline">PurpleStar</Link>
+        <span className="mx-2">›</span>
+        <Link href="/learn/" className="text-imperial-gold hover:underline">Learn</Link>
+        <span className="mx-2">›</span>
+        <span>How to Read a Ziwei Chart</span>
+      </nav>
 
       <article className="purple-card rounded-2xl p-8 md:p-12">
         <header className="mb-8">
@@ -166,6 +170,63 @@ export default function Article() {
         about: [
           { '@type': 'Thing', name: 'Ziwei Doushu' },
           { '@type': 'Thing', name: 'Chart Reading' },
+        ],
+      }) }} />
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'How do I read my Ziwei Doushu chart for the first time?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Start with these 5 steps: (1) Understand the 4x3 grid shape with 12 palaces. (2) Find your Life Palace — it shows your main star and core personality. (3) Find your Body Palace — it shows how you actually live. (4) Identify your main star (Ziwei, Tianji, Wuqu, etc.) — each has a distinct archetype. (5) Look at the Four Transformations (Lu, Quan, Ke, Ji) flying through your chart — they show what energy is currently active.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'What is the Life Palace in Ziwei Doushu?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'The Life Palace (命宫) is the most important palace in your Ziwei chart. It represents your core personality, your default mode of being in the world, and your overall life direction. The main star in your Life Palace (called your Ming Zhu) is the headline of your personality archetype. Look for it first — it sets the tone for everything else.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'What does an empty palace mean in Ziwei?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'An empty palace (no main star) is not weak or bad — it means the palace is led by auxiliary stars and the Four Transformations. Empty palaces often represent areas of life where you have freedom and flexibility, themes you can shape rather than themes that shape you. Many successful people have empty Wealth or Career palaces.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'How accurate is PurpleStar chart generator?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'PurpleStar uses the open-source Renhuai123/ziwei-doushu chart engine (MIT licensed) and the 518,400-chart sample dataset for accurate star placement calculations. The chart structure (12 palaces, 14 main stars, Four Transformations, decade luck pillars) is computed algorithmically — the math is reliable. Interpretation varies by practitioner.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Do I need exact birth time to read my Ziwei chart?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Yes, exact birth time matters more in Ziwei Doushu than in Western astrology. The chart structure depends on your month and hour of birth. Even a 30-minute difference can shift palace positions. Use your true solar time (the local clock time adjusted for longitude and daylight saving) for the most accurate chart.',
+            },
+          },
+        ],
+      }) }} />
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'PurpleStar', item: 'https://purplestar.cc/' },
+          { '@type': 'ListItem', position: 2, name: 'Learn Ziwei Doushu', item: 'https://purplestar.cc/learn/' },
+          { '@type': 'ListItem', position: 3, name: 'How to Read a Ziwei Chart', item: 'https://purplestar.cc/learn/how-to-read-purple-star-astrology-chart/' },
         ],
       }) }} />
     </main>

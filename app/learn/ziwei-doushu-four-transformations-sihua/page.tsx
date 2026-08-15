@@ -12,7 +12,13 @@ export const metadata: Metadata = {
 export default function Article() {
   return (
     <main className="min-h-screen px-6 py-12 max-w-4xl mx-auto">
-      <div className="mb-6"><Link href="/" className="text-imperial-gold hover:underline text-sm">← PurpleStar Home</Link></div>
+      <nav aria-label="Breadcrumb" className="mb-6 text-sm text-imperial-parchment/60">
+        <Link href="/" className="text-imperial-gold hover:underline">PurpleStar</Link>
+        <span className="mx-2">›</span>
+        <Link href="/learn/" className="text-imperial-gold hover:underline">Learn</Link>
+        <span className="mx-2">›</span>
+        <span>Four Transformations (Sihua)</span>
+      </nav>
 
       <article className="purple-card rounded-2xl p-8 md:p-12">
         <header className="mb-8">
@@ -165,6 +171,16 @@ export default function Article() {
         about: [
           { '@type': 'Thing', name: 'Four Transformations (Sihua)' },
           { '@type': 'Thing', name: 'Ziwei Doushu' },
+        ],
+      }) }} />
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'PurpleStar', item: 'https://purplestar.cc/' },
+          { '@type': 'ListItem', position: 2, name: 'Learn Ziwei Doushu', item: 'https://purplestar.cc/learn/' },
+          { '@type': 'ListItem', position: 3, name: 'Four Transformations (Sihua)', item: 'https://purplestar.cc/learn/ziwei-doushu-four-transformations-sihua/' },
         ],
       }) }} />
     </main>

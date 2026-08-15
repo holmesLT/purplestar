@@ -12,7 +12,13 @@ export const metadata: Metadata = {
 export default function Article() {
   return (
     <main className="min-h-screen px-6 py-12 max-w-4xl mx-auto">
-      <div className="mb-6"><Link href="/" className="text-imperial-gold hover:underline text-sm">← PurpleStar Home</Link></div>
+      <nav aria-label="Breadcrumb" className="mb-6 text-sm text-imperial-parchment/60">
+        <Link href="/" className="text-imperial-gold hover:underline">PurpleStar</Link>
+        <span className="mx-2">›</span>
+        <Link href="/learn/" className="text-imperial-gold hover:underline">Learn</Link>
+        <span className="mx-2">›</span>
+        <span>Is Ziwei Doushu Accurate?</span>
+      </nav>
 
       <article className="purple-card rounded-2xl p-8 md:p-12">
         <header className="mb-8">
@@ -135,6 +141,63 @@ export default function Article() {
         about: [
           { '@type': 'Thing', name: 'Ziwei Doushu' },
           { '@type': 'Thing', name: 'Astrology Accuracy' },
+        ],
+      }) }} />
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'Is Ziwei Doushu actually accurate?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Ziwei Doushu is more accurate than pure Barnum statements but less accurate than deterministic prediction. In three years of testing against my own life events, structural predictions (personality archetype, family dynamics, decade timing) held up about 75% of the time, while specific event predictions held up about 40% of the time. Treat it as a language for understanding patterns, not a fortune-telling tool for specific events.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'How accurate is Ziwei Doushu compared to Western astrology?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Both systems have similar accuracy ranges — better at structural patterns than specific events. Ziwei Doushu tends to be more accurate for long-term life structure (decade luck pillars, role analysis) and Western astrology tends to be more accurate for short-term psychological timing (Saturn return, transits). Serious readers of either tradition usually use both.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'What can Ziwei Doushu predict accurately?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Ziwei Doushu is most accurate at predicting: personality archetype from your main star, family dynamic patterns from parent chart interactions, decade-scale life themes from the luck pillar system, and recurring patterns from the Four Transformations. It is least accurate at predicting specific events with exact timing, like when you will get married or change jobs.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Is Ziwei Doushu scientific?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Ziwei Doushu is not scientific in the empirical sense — there are no controlled studies validating its predictive power. It is, however, a sophisticated mathematical and symbolic system with internal coherence developed over 1,000 years. Like all traditional astrology systems, it works better as a framework for self-reflection than as a deterministic prediction engine.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: 'Should I trust Ziwei Doushu for major life decisions?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'No traditional astrology system — Ziwei, Western, Bazi, Vedic — should be the primary basis for major life decisions. Use them as one input among many. For career, relationship, or financial decisions, combine astrological insights with practical research, professional advice, and your own judgment. Astrology describes patterns; you decide how to respond to them.',
+            },
+          },
+        ],
+      }) }} />
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'PurpleStar', item: 'https://purplestar.cc/' },
+          { '@type': 'ListItem', position: 2, name: 'Learn Ziwei Doushu', item: 'https://purplestar.cc/learn/' },
+          { '@type': 'ListItem', position: 3, name: 'Is Ziwei Doushu Accurate?', item: 'https://purplestar.cc/learn/is-ziwei-doushu-accurate/' },
         ],
       }) }} />
     </main>

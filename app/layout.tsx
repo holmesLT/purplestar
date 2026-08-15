@@ -22,15 +22,49 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     siteName: 'PurpleStar',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'PurpleStar — Ziwei Doushu (Purple Star Astrology)',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'PurpleStar — Ziwei Doushu Reading',
     description: 'Free Ziwei Doushu birth chart + AI-powered life reading.',
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
     follow: true,
+  },
+  metadataBase: new URL('https://purplestar.cc'),
+};
+
+// Organization schema — global identity for Google Knowledge Graph and brand searches.
+// Renders once in the root layout so every page inherits it.
+const ORGANIZATION_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'PurpleStar',
+  alternateName: 'Purple Star Astrology',
+  url: 'https://purplestar.cc',
+  logo: 'https://purplestar.cc/icon.svg',
+  image: 'https://purplestar.cc/og-image.png',
+  description:
+    'Free Ziwei Doushu (Purple Star Astrology) birth chart generator with AI-powered life readings. The most sophisticated Chinese birth chart system, refined over 1,000 years.',
+  foundingDate: '2026',
+  sameAs: [
+    'https://purplestar.cc',
+  ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer support',
+    url: 'https://purplestar.cc',
+    availableLanguage: ['English'],
   },
 };
 
@@ -73,6 +107,12 @@ export default function RootLayout({
         />
       </head>
       <body>
+        {/* Organization schema — site-wide brand identity. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_SCHEMA) }}
+        />
+
         {children}
 
         {/* === AdSense Auto Ads bootstrap === */}

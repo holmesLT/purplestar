@@ -19,7 +19,13 @@ export default function Article() {
   return (
     <main className="min-h-screen px-6 py-12 max-w-4xl mx-auto">
       <div className="mb-6">
-        <Link href="/" className="text-imperial-gold hover:underline text-sm">← PurpleStar Home</Link>
+        <nav aria-label="Breadcrumb" className="mb-6 text-sm text-imperial-parchment/60">
+          <Link href="/" className="text-imperial-gold hover:underline">PurpleStar</Link>
+          <span className="mx-2">›</span>
+          <Link href="/learn/" className="text-imperial-gold hover:underline">Learn</Link>
+          <span className="mx-2">›</span>
+          <span>Ziwei Doushu vs Bazi</span>
+        </nav>
       </div>
 
       <article className="purple-card rounded-2xl p-8 md:p-12">
@@ -168,6 +174,31 @@ export default function Article() {
           { '@type': 'Thing', name: 'Ziwei Doushu' },
           { '@type': 'Thing', name: 'Bazi (Four Pillars)' },
           { '@type': 'Thing', name: 'Chinese Astrology' },
+        ],
+      }) }} />
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'PurpleStar',
+            item: 'https://purplestar.cc/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Learn Ziwei Doushu',
+            item: 'https://purplestar.cc/learn/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: 'Ziwei Doushu vs Bazi',
+            item: 'https://purplestar.cc/learn/ziwei-doushu-vs-bazi/',
+          },
         ],
       }) }} />
     </main>
