@@ -36,7 +36,7 @@ export default function HomePage() {
               <span className="text-imperial-gold">$9.9</span> AI Reading
             </div>
             <div className="px-4 py-2 rounded-full border border-imperial-gold/30 bg-imperial-purple/30">
-              <span className="text-imperial-gold">$29.9</span> Full Report
+              <span className="text-imperial-gold">$9.9</span> Full Report
             </div>
           </div>
 

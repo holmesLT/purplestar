@@ -162,8 +162,8 @@ function ChartContent() {
         </p>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-          <PayCard tier="basic" price={9.9} chartId={chartId} chart={chart} />
-          <PayCard tier="premium" price={29.9} chartId={chartId} chart={chart} highlight />
+          <PayCard tier="basic" price={12.9} chartId={chartId} chart={chart} />
+          <PayCard tier="premium" price={19.9} chartId={chartId} chart={chart} highlight />
         </div>
       </section>
     </main>
@@ -198,6 +198,8 @@ function PayCard({
   highlight?: boolean;
 }) {
   const [loading, setLoading] = useState(false);
+  const [cryptoLoading, setCryptoLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function handleCheckout() {
     // 用 sessionStorage 把 chartId 带到 Stripe 跳回后（Payment Link 不支持自定义 metadata）
@@ -207,6 +209,39 @@ function PayCard({
     } catch (err: any) {
       alert(err.message);
       setLoading(false);
+    }
+  }
+
+  async function handleCryptoCheckout() {
+    setCryptoLoading(true);
+    setError(null);
+    try {
+      // 保存 chart 给 worker(走 /api/chart/save),crypto 支付完成后 /report 才能拉到
+      await fetch(`${API_BASE}/api/chart/save`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: chartId, chart }),
+      }).catch(() => {/* 不阻塞支付流程 */});
+
+      // 把 chartId/tier 也存到 sessionStorage,跟 Stripe 路径一致
+      sessionStorage.setItem('pendingChart', JSON.stringify({ chartId, tier }));
+
+      const resp = await fetch(`${API_BASE}/api/nowpayments/create-payment`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tier, chartId, chart }),
+      });
+      const data = await resp.json();
+      if (!resp.ok || !data.ok) {
+        throw new Error(data.error || `Payment creation failed (${resp.status})`);
+      }
+      // 把 payment_id 存 sessionStorage,return 页用
+      sessionStorage.setItem('pendingCryptoPayment', data.payment_id);
+      // 跳到 NOWPayments 托管支付页
+      window.location.href = data.invoice_url;
+    } catch (err: any) {
+      setError(err.message);
+      setCryptoLoading(false);
     }
   }
 
@@ -252,11 +287,29 @@ function PayCard({
       </ul>
       <button
         onClick={handleCheckout}
-        disabled={loading}
+        disabled={loading || cryptoLoading}
         className="gold-btn w-full disabled:opacity-50"
       >
-        {loading ? 'Loading…' : 'Get My Reading'}
+        {loading ? 'Loading…' : '💳 Pay with Card (Stripe)'}
       </button>
+      <button
+        onClick={handleCryptoCheckout}
+        disabled={loading || cryptoLoading}
+        className="w-full mt-2 py-2 px-4 rounded-lg border border-imperial-gold/40 bg-imperial-purple/40 text-imperial-parchment text-sm hover:bg-imperial-purple/60 disabled:opacity-50 transition flex items-center justify-center gap-2"
+      >
+        {cryptoLoading ? (
+          'Creating payment…'
+        ) : (
+          <>
+            <span>🪙</span>
+            <span>Pay with Crypto (XRP · BTC · USDT)</span>
+            <span className="text-xs text-imperial-parchment/50">· 加密货币支付</span>
+          </>
+        )}
+      </button>
+      {error && (
+        <div className="mt-2 text-xs text-red-400">{error}</div>
+      )}
     </div>
   );
 }

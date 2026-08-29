@@ -11,6 +11,7 @@ function ReportContent() {
   const chartId = searchParams.get('chartId') || '';
   const tier = (searchParams.get('tier') as 'basic' | 'premium') || 'basic';
   const sessionId = searchParams.get('session_id');
+  const nowpaymentsPaymentId = searchParams.get('nowpayments_payment_id');
 
   const [chart, setChart] = useState<any>(null);
   const [reading, setReading] = useState<string | null>(null);
@@ -20,7 +21,7 @@ function ReportContent() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // 1) 从 URL hash 取 chart（hash 跳转能塞下完整 chart 数据,避免再查 D1）
+    // 1) 从 URL hash 取 chart
     const hash = window.location.hash.replace(/^#/, '');
     let chartData: any = null;
     if (hash) {
@@ -30,17 +31,21 @@ function ReportContent() {
       } catch {}
     }
 
-    // 2) 验证支付 + 生成解读(支持多 endpoint fallback,过渡期 DNS 不稳时仍可用)
-    if (!sessionId) {
+    // 2) 验证支付 + 生成解读(支持 Stripe + NOWPayments)
+    if (!sessionId && !nowpaymentsPaymentId) {
       setError('No payment session. Please complete checkout first.');
       setLoading(false);
       return;
     }
 
+    const body: any = { chart: chartData, chartId, tier };
+    if (sessionId) body.sessionId = sessionId;
+    if (nowpaymentsPaymentId) body.nowpaymentsPaymentId = nowpaymentsPaymentId;
+
     fetch(`${API_BASE}/api/interpret`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chart: chartData, chartId, tier, sessionId }),
+      body: JSON.stringify(body),
     })
       .then(r => {
         if (!r.ok) {
@@ -56,7 +61,7 @@ function ReportContent() {
       .then(data => setReading(data.reading))
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
-  }, [tier, sessionId, chartId]);
+  }, [tier, sessionId, nowpaymentsPaymentId, chartId]);
 
   if (loading) {
     return (
