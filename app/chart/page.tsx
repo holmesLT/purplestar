@@ -235,10 +235,23 @@ function PayCard({
       if (!resp.ok || !data.ok) {
         throw new Error(data.error || `Payment creation failed (${resp.status})`);
       }
-      // 把 payment_id 存 sessionStorage,return 页用
-      sessionStorage.setItem('pendingCryptoPayment', data.payment_id);
-      // 跳到 NOWPayments 托管支付页
-      window.location.href = data.invoice_url;
+      // 把 payment_id + pay_address + pay_amount 存 sessionStorage,return 页用
+      sessionStorage.setItem('pendingCryptoPayment', JSON.stringify({
+        payment_id: data.payment_id,
+        order_id: data.order_id,
+        pay_address: data.pay_address,
+        pay_amount: data.pay_amount,
+        pay_currency: data.pay_currency,
+        amount_usd: data.amount_usd,
+        tier,
+      }));
+      // 跳到我们自己的支付页(显示 XRP 地址 + QR + 倒计时)
+      // 跳过 NP 托管页 — 它有 301→http 的 bug 会导致 SPA JS 加载失败显示 404
+      const params = new URLSearchParams({
+        payment_id: String(data.payment_id),
+        order_id: data.order_id,
+      });
+      window.location.href = `/payment-return-crypto?${params.toString()}`;
     } catch (err: any) {
       setError(err.message);
       setCryptoLoading(false);
