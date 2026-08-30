@@ -12,6 +12,7 @@ function ReportContent() {
   const tier = (searchParams.get('tier') as 'basic' | 'premium') || 'basic';
   const sessionId = searchParams.get('session_id');
   const nowpaymentsPaymentId = searchParams.get('nowpayments_payment_id');
+  const selfCryptoOrderId = searchParams.get('self_crypto_order_id');
 
   const [chart, setChart] = useState<any>(null);
   const [reading, setReading] = useState<string | null>(null);
@@ -31,8 +32,8 @@ function ReportContent() {
       } catch {}
     }
 
-    // 2) 验证支付 + 生成解读(支持 Stripe + NOWPayments)
-    if (!sessionId && !nowpaymentsPaymentId) {
+    // 2) 验证支付 + 生成解读(支持 Stripe + NOWPayments + 自托管 XRP)
+    if (!sessionId && !nowpaymentsPaymentId && !selfCryptoOrderId) {
       setError('No payment session. Please complete checkout first.');
       setLoading(false);
       return;
@@ -41,6 +42,7 @@ function ReportContent() {
     const body: any = { chart: chartData, chartId, tier };
     if (sessionId) body.sessionId = sessionId;
     if (nowpaymentsPaymentId) body.nowpaymentsPaymentId = nowpaymentsPaymentId;
+    if (selfCryptoOrderId) body.selfCryptoOrderId = selfCryptoOrderId;
 
     fetch(`${API_BASE}/api/interpret`, {
       method: 'POST',
@@ -61,7 +63,7 @@ function ReportContent() {
       .then(data => setReading(data.reading))
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
-  }, [tier, sessionId, nowpaymentsPaymentId, chartId]);
+  }, [tier, sessionId, nowpaymentsPaymentId, selfCryptoOrderId, chartId]);
 
   if (loading) {
     return (

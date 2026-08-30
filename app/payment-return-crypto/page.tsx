@@ -7,13 +7,13 @@ import Link from 'next/link';
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'https://api.purplestar.cc';
 
 interface PendingCrypto {
-  payment_id: number | string;
   order_id: string;
   pay_address?: string;
   pay_amount?: number;
   pay_currency?: string;
   amount_usd?: number;
   tier?: 'basic' | 'premium';
+  expires_at?: number;
 }
 
 function CryptoPaymentReturnContent() {
@@ -29,36 +29,32 @@ function CryptoPaymentReturnContent() {
   // Load pending payment info from URL or sessionStorage
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const paymentIdFromQuery = searchParams.get('payment_id');
     const orderIdFromQuery = searchParams.get('order_id');
+    const tierFromQuery = searchParams.get('tier') as 'basic' | 'premium' | null;
 
     let loaded: PendingCrypto | null = null;
-    if (paymentIdFromQuery) {
-      // try to merge with sessionStorage for richer info
+    if (orderIdFromQuery) {
       try {
         const raw = sessionStorage.getItem('pendingCryptoPayment');
         if (raw) {
           const parsed = JSON.parse(raw);
-          if (String(parsed.payment_id) === String(paymentIdFromQuery)) {
+          if (parsed.order_id === orderIdFromQuery) {
             loaded = parsed;
+            if (tierFromQuery && !parsed.tier) loaded.tier = tierFromQuery;
           }
         }
       } catch {}
       if (!loaded) {
-        loaded = {
-          payment_id: paymentIdFromQuery,
-          order_id: orderIdFromQuery || '',
-        };
+        loaded = { order_id: orderIdFromQuery, tier: tierFromQuery || undefined };
       }
     } else {
-      // fallback to sessionStorage
       try {
         const raw = sessionStorage.getItem('pendingCryptoPayment');
         if (raw) loaded = JSON.parse(raw);
       } catch {}
     }
 
-    if (!loaded || !loaded.payment_id) {
+    if (!loaded || !loaded.order_id) {
       setStatus('error');
       setErrorMsg('Missing payment info. Please return to the chart page and try again.');
       return;
@@ -66,7 +62,14 @@ function CryptoPaymentReturnContent() {
 
     setPending(loaded);
 
-    // Clean sessionStorage (we'll read it again from /report if needed)
+    // Set initial countdown from expires_at
+    if (loaded.expires_at) {
+      const remaining = loaded.expires_at - Math.floor(Date.now() / 1000);
+      if (remaining > 0) setSecondsLeft(remaining);
+      else setSecondsLeft(0);
+    }
+
+    // Clean sessionStorage
     try {
       sessionStorage.removeItem('pendingCryptoPayment');
     } catch {}
@@ -84,9 +87,9 @@ function CryptoPaymentReturnContent() {
     if (!pending || (status !== 'waiting' && status !== 'polling')) return;
 
     let attempts = 0;
-    const maxAttempts = 240; // 240 × 5s = 20 min — covers full expiration window
+    const maxAttempts = 360; // 360 × 5s = 30 min — covers full expiration window
 
-    const queryId = pending.payment_id || pending.order_id;
+    const queryId = pending.order_id;
     if (!queryId) return;
 
     setStatus('polling');
@@ -94,11 +97,11 @@ function CryptoPaymentReturnContent() {
     const poll = async () => {
       attempts++;
       try {
-        const resp = await fetch(`${API_BASE}/api/nowpayments/payment/${encodeURIComponent(String(queryId))}`);
+        const resp = await fetch(`${API_BASE}/api/crypto/payment/${encodeURIComponent(queryId)}`);
         if (resp.ok) {
           const data: any = await resp.json();
           setNowpaymentsStatus(data.status || 'unknown');
-          if (['finished', 'confirmed', 'sending'].includes(data.status)) {
+          if (['finished', 'confirmed'].includes(data.status)) {
             // resolve tier and chartId for redirect
             const tier = pending.tier || data.tier || 'basic';
             let chartId: string | null = null;
@@ -119,15 +122,14 @@ function CryptoPaymentReturnContent() {
               return;
             }
             setStatus('redirecting');
-            const finalPaymentId = data.payment_id || pending.payment_id;
             // Clear poll and redirect
             if (pollTimerRef.current) clearTimeout(pollTimerRef.current);
             setTimeout(() => {
-              router.replace(`/report?chartId=${chartId}&tier=${tier}&nowpayments_payment_id=${finalPaymentId}`);
+              router.replace(`/report?chartId=${chartId}&tier=${tier}&self_crypto_order_id=${queryId}`);
             }, 800);
             return;
           }
-          if (['failed', 'refunded'].includes(data.status)) {
+          if (['failed', 'expired'].includes(data.status)) {
             setStatus('error');
             setErrorMsg(`Payment ${data.status}. Please return to the chart page and try a new payment.`);
             return;
@@ -140,7 +142,7 @@ function CryptoPaymentReturnContent() {
         pollTimerRef.current = setTimeout(poll, 5000);
       } else {
         setStatus('pending');
-        setErrorMsg('Blockchain confirmation is taking longer than 20 minutes. You can safely close this page — once your payment is confirmed on-chain we will email your reading within the next hour.');
+        setErrorMsg('Blockchain confirmation is taking longer than 30 minutes. You can safely close this page — once your payment is confirmed on-chain, we will email your reading within the next hour.');
       }
     };
 
@@ -200,7 +202,7 @@ function CryptoPaymentReturnContent() {
               {payAmt} <span className="text-2xl">{payCcy}</span>
             </div>
             <div className="text-imperial-parchment/50 text-xs">
-              ≈ ${pending?.amount_usd?.toFixed(2) || '—'} USD · Payment ID: {pending?.payment_id}
+              ≈ ${pending?.amount_usd?.toFixed(2) || '—'} USD · Order ID: {pending?.order_id?.slice(0, 8)}…
             </div>
           </div>
 
