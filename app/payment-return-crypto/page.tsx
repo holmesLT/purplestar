@@ -22,7 +22,7 @@ function CryptoPaymentReturnContent() {
   const [status, setStatus] = useState<'waiting' | 'polling' | 'redirecting' | 'pending' | 'error'>('waiting');
   const [errorMsg, setErrorMsg] = useState<string>('');
   const [pending, setPending] = useState<PendingCrypto | null>(null);
-  const [nowpaymentsStatus, setNowpaymentsStatus] = useState<string>('waiting');
+  const [blockchainStatus, setBlockchainStatus] = useState<string>('waiting');
   const [secondsLeft, setSecondsLeft] = useState<number>(1200); // 20 min default
   const pollTimerRef = useRef<any>(null);
 
@@ -100,7 +100,7 @@ function CryptoPaymentReturnContent() {
         const resp = await fetch(`${API_BASE}/api/crypto/payment/${encodeURIComponent(queryId)}`);
         if (resp.ok) {
           const data: any = await resp.json();
-          setNowpaymentsStatus(data.status || 'unknown');
+          setBlockchainStatus(data.status || 'unknown');
           if (['finished', 'confirmed'].includes(data.status)) {
             // resolve tier and chartId for redirect
             const tier = pending.tier || data.tier || 'basic';
@@ -191,7 +191,7 @@ function CryptoPaymentReturnContent() {
           🪙 Complete Your Crypto Payment
         </h1>
         <p className="text-center text-imperial-parchment/60 text-sm mb-8">
-          Send exactly the amount below to the XRP address. Your reading unlocks automatically once the blockchain confirms.
+          Send exactly the amount below to the address. Your reading unlocks automatically once the blockchain confirms.
         </p>
 
         <div className="rounded-xl border-2 border-imperial-gold/40 bg-imperial-purple/30 p-6 mb-6">
@@ -211,10 +211,10 @@ function CryptoPaymentReturnContent() {
             <div className="flex justify-center mb-6">
               <div className="bg-white p-4 rounded-lg">
                 <img
-                  alt="XRP payment QR code"
+                  alt={`${payCcy} payment QR code`}
                   width={208}
                   height={208}
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=208x208&data=${encodeURIComponent(payAddr)}&color=000000&bgcolor=ffffff&margin=1`}
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=208x208&data=${encodeURIComponent(pending?.pay_currency === 'usdt_trc20' ? `tron:${payAddr}` : payAddr)}&color=000000&bgcolor=ffffff&margin=1`}
                   className="block"
                 />
               </div>
@@ -225,7 +225,7 @@ function CryptoPaymentReturnContent() {
           {payAddr && (
             <div className="mb-4">
               <div className="text-imperial-parchment/60 text-xs uppercase tracking-wider mb-2 text-center">
-                Send to this XRP address
+                Send to this {pending?.pay_currency === 'usdt_trc20' ? 'Tron (TRC20)' : 'XRP'} address
               </div>
               <div className="bg-imperial-ink/60 border border-imperial-gold/30 rounded-lg p-3 flex items-center gap-2">
                 <code className="flex-1 text-imperial-parchment text-xs break-all font-mono">
@@ -244,13 +244,18 @@ function CryptoPaymentReturnContent() {
                   ⚠ Include the <strong>Destination Tag</strong> if your wallet asks for one (Memo field). Tag: <strong>none needed</strong> for this payment.
                 </p>
               )}
+              {pending?.pay_currency === 'usdt_trc20' && (
+                <p className="text-imperial-parchment/50 text-xs mt-2 text-center">
+                  ⚠ Network: <strong>Tron (TRC20)</strong> only. Sending USDT on a different chain (ERC20, BEP20, etc.) will result in permanent loss of funds.
+                </p>
+              )}
             </div>
           )}
 
           {/* Status row */}
           <div className="flex items-center justify-between text-xs text-imperial-parchment/60 border-t border-imperial-gold/20 pt-4">
             <div>
-              Blockchain status: <span className="text-imperial-gold">{nowpaymentsStatus}</span>
+              Blockchain status: <span className="text-imperial-gold">{blockchainStatus}</span>
             </div>
             <div>
               ⏳ {mm}:{ss}
@@ -262,10 +267,13 @@ function CryptoPaymentReturnContent() {
         <div className="text-imperial-parchment/70 text-sm space-y-2 mb-6">
           <div className="font-semibold text-imperial-gold mb-2">How to pay:</div>
           <ol className="list-decimal pl-5 space-y-1.5">
-            <li>Open your XRP wallet (Trust Wallet, Ledger, Exodus, Uphold, etc.)</li>
+            <li>Open your {pending?.pay_currency === 'usdt_trc20' ? 'Tron' : 'XRP'} wallet (Trust Wallet, Ledger, Exodus, Uphold, etc.)</li>
             <li>Paste the address above or scan the QR code</li>
             <li>Send <strong>exactly {payAmt} {payCcy}</strong> (smallest deviation may delay confirmation)</li>
-            <li>Wait for blockchain confirmation (usually 30-90 seconds on XRP)</li>
+            <li>
+              Wait for blockchain confirmation (usually{' '}
+              {pending?.pay_currency === 'usdt_trc20' ? '60-180 seconds on Tron' : '30-90 seconds on XRP'})
+            </li>
             <li>This page will automatically detect the payment and load your reading</li>
           </ol>
         </div>
