@@ -33,10 +33,10 @@ export default function HomePage() {
               <span className="text-imperial-gold">Free</span> Birth Chart
             </div>
             <div className="px-4 py-2 rounded-full border border-imperial-gold/30 bg-imperial-purple/30">
-              <span className="text-imperial-gold">$9.9</span> AI Reading
+              <span className="text-imperial-gold">$3.99</span> AI Reading
             </div>
             <div className="px-4 py-2 rounded-full border border-imperial-gold/30 bg-imperial-purple/30">
-              <span className="text-imperial-gold">$9.9</span> Full Report
+              <span className="text-imperial-gold">$9.99</span> Full Report
             </div>
           </div>
 

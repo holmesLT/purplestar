@@ -8,8 +8,8 @@ import type { ChartResult } from '@/lib/ziwei';
 
 // Stripe Payment Links (live mode)
 const PAYMENT_LINKS = {
-  basic: 'https://buy.stripe.com/cNi6oHbTZgfs6I3dVwgUM00',
-  premium: 'https://buy.stripe.com/7sY5kD1fl6ES3vR5p0gUM01',
+  basic: 'https://buy.stripe.com/aFa8wP1fld3g5DZ6t4gUM03',
+  premium: 'https://buy.stripe.com/5kQ14nf6b3sG6I304GgUM04',
 };
 
 // API endpoint
@@ -162,8 +162,8 @@ function ChartContent() {
         </p>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-          <PayCard tier="basic" price={12.9} chartId={chartId} chart={chart} />
-          <PayCard tier="premium" price={19.9} chartId={chartId} chart={chart} highlight />
+          <PayCard tier="basic" price={3.99} chartId={chartId} chart={chart} />
+          <PayCard tier="premium" price={9.99} chartId={chartId} chart={chart} highlight />
         </div>
       </section>
     </main>
