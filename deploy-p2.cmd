@@ -16,7 +16,7 @@ if errorlevel 1 (
 )
 
 echo === 3. git commit ===
-git commit -m "fix(seo): explicit Content-Type + cache headers for sitemap.xml and robots.txt"
+git commit -m "fix(seo): serve sitemap.xml via Pages Function to bypass Cloudflare nosniff header (GSC fix)"
 if errorlevel 1 (
   echo nothing to commit or commit failed
   exit /b 1
