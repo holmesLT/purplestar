@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/chart/'],
+        disallow: ['/api/', '/chart', '/report', '/payment-return', '/payment-return-crypto'],
       },
     ],
     sitemap: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://purplestar.cc'}/sitemap.xml`,

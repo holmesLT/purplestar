@@ -16,7 +16,7 @@ if errorlevel 1 (
 )
 
 echo === 3. git commit ===
-git commit -m "P2 SEO: per-page OG + Twitter cards on 8 learn articles + /learn index"
+git commit -m "fix(seo): add trailing slashes to sitemap <loc> + tighten robots disallow"
 if errorlevel 1 (
   echo nothing to commit or commit failed
   exit /b 1

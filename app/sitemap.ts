@@ -22,13 +22,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     {
-      url: baseUrl,
+      url: `${baseUrl}/`,
       lastModified: homepageLastmod,
       changeFrequency: 'weekly',
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/learn`,
+      url: `${baseUrl}/learn/`,
       lastModified: learnHubLastmod,
       changeFrequency: 'weekly',
       priority: 0.9,
