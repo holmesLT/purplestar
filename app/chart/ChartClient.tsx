@@ -198,65 +198,17 @@ function PayCard({
   highlight?: boolean;
 }) {
   const [loading, setLoading] = useState(false);
-  const [cryptoLoading, setCryptoLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [cryptoChoice, setCryptoChoice] = useState<'xrp' | 'usdt_trc20'>('xrp');
 
   async function handleCheckout() {
-    // 用 sessionStorage 把 chartId 带到 Stripe 跳回后（Payment Link 不支持自定义 metadata）
+    // 用 sessionStorage 把 chartId 带到 Stripe 跳回后(Payment Link 不支持自定义 metadata)
+    setLoading(true);
     try {
       sessionStorage.setItem('pendingChart', JSON.stringify({ chartId, tier }));
       window.location.href = PAYMENT_LINKS[tier];
     } catch (err: any) {
-      alert(err.message);
-      setLoading(false);
-    }
-  }
-
-  async function handleCryptoCheckout() {
-    setCryptoLoading(true);
-    setError(null);
-    try {
-      // 保存 chart 给 worker(走 /api/chart/save),crypto 支付完成后 /report 才能拉到
-      await fetch(`${API_BASE}/api/chart/save`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: chartId, chart }),
-      }).catch(() => {/* 不阻塞支付流程 */});
-
-      // 把 chartId/tier 也存到 sessionStorage,跟 Stripe 路径一致
-      sessionStorage.setItem('pendingChart', JSON.stringify({ chartId, tier }));
-
-      const resp = await fetch(`${API_BASE}/api/crypto/create-payment`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tier, chartId, chart, pay_currency: cryptoChoice }),
-      });
-      const data = await resp.json();
-      if (!resp.ok || !data.ok) {
-        throw new Error(data.error || `Payment creation failed (${resp.status})`);
-      }
-      // 把 order_id + pay_address + pay_amount 存 sessionStorage,return 页用
-      sessionStorage.setItem('pendingCryptoPayment', JSON.stringify({
-        order_id: data.order_id,
-        pay_address: data.pay_address,
-        pay_amount: data.pay_amount,
-        pay_currency: data.pay_currency,
-        amount_usd: data.amount_usd,
-        fx_rate: data.fx_rate,
-        tier,
-        expires_at: data.expires_at,
-      }));
-      // 跳到我们自己的支付页(显示地址 + QR + 倒计时)
-      const params = new URLSearchParams({
-        order_id: data.order_id,
-        tier,
-        chartId: chartId || '',
-      });
-      window.location.href = `/payment-return-crypto?${params.toString()}`;
-    } catch (err: any) {
       setError(err.message);
-      setCryptoLoading(false);
+      setLoading(false);
     }
   }
 
@@ -302,38 +254,11 @@ function PayCard({
       </ul>
       <button
         onClick={handleCheckout}
-        disabled={loading || cryptoLoading}
+        disabled={loading}
         className="gold-btn w-full disabled:opacity-50"
       >
         {loading ? 'Loading…' : '💳 Pay with Card (Stripe)'}
       </button>
-      <div className="mt-2 flex items-stretch rounded-lg border border-imperial-gold/40 bg-imperial-purple/40 overflow-hidden">
-        <select
-          aria-label="Cryptocurrency"
-          value={cryptoChoice}
-          onChange={(e) => setCryptoChoice(e.target.value as 'xrp' | 'usdt_trc20')}
-          disabled={loading || cryptoLoading}
-          className="bg-imperial-purple/60 text-imperial-parchment text-xs font-medium px-2 py-2 border-r border-imperial-gold/40 focus:outline-none disabled:opacity-50"
-        >
-          <option value="xrp">XRP</option>
-          <option value="usdt_trc20">USDT-TRC20</option>
-        </select>
-        <button
-          onClick={handleCryptoCheckout}
-          disabled={loading || cryptoLoading}
-          className="flex-1 py-2 px-3 text-imperial-parchment text-sm hover:bg-imperial-purple/60 disabled:opacity-50 transition flex items-center justify-center gap-2"
-        >
-          {cryptoLoading ? (
-            'Creating payment…'
-          ) : (
-            <>
-              <span>🪙</span>
-              <span>Pay with Crypto</span>
-              <span className="text-xs text-imperial-parchment/50">· 加密货币支付</span>
-            </>
-          )}
-        </button>
-      </div>
       {error && (
         <div className="mt-2 text-xs text-red-400">{error}</div>
       )}
