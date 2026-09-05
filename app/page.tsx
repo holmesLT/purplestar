@@ -1,5 +1,49 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import ChartForm from '@/components/ChartForm';
+
+export const metadata: Metadata = {
+  title: 'PurpleStar — Your Destiny Written in the Stars of the East',
+  description:
+    'Discover your destiny with Ziwei Doushu (Purple Star Astrology), the most sophisticated Chinese birth chart system — refined over 1,000 years. Get your free chart and AI-powered life reading.',
+  alternates: {
+    canonical: 'https://purplestar.cc/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-snippet': -1,
+      'max-image-preview': 'large',
+      'max-video-preview': -1,
+    },
+  },
+  openGraph: {
+    title: 'PurpleStar — Your Destiny Written in the Stars of the East',
+    description:
+      'Free Ziwei Doushu birth chart + AI-powered life reading. The most sophisticated Chinese birth chart system, refined over 1,000 years.',
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://purplestar.cc/',
+    siteName: 'PurpleStar',
+    images: [
+      {
+        url: 'https://purplestar.cc/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'PurpleStar — Ziwei Doushu (Purple Star Astrology)',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'PurpleStar — Ziwei Doushu Reading',
+    description: 'Free Ziwei Doushu birth chart + AI-powered life reading.',
+    images: ['https://purplestar.cc/og-image.png'],
+  },
+};
 
 export default function HomePage() {
   return (
