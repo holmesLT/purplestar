@@ -5,7 +5,30 @@ export const metadata: Metadata = {
   title: 'Is Ziwei Doushu Accurate? A Honest Look at the Evidence',
   description: 'A critical, evidence-aware discussion of Ziwei Doushu accuracy. How the system works, what it can and cannot tell you, and how to approach a reading responsibly.',
   keywords: ['is ziwei doushu accurate', 'ziwei doushu accuracy', 'does purple star astrology work', 'ziwei doushu scientific'],
-  openGraph: { title: 'Is Ziwei Doushu Accurate?', type: 'article' },
+  openGraph: {
+    title: 'Is Ziwei Doushu Accurate? An Honest Investigation',
+    description: 'A critical, evidence-aware discussion of Ziwei Doushu accuracy — what the system can and cannot tell you, and how to approach a reading responsibly.',
+    type: 'article',
+    url: 'https://purplestar.cc/learn/is-ziwei-doushu-accurate/',
+    siteName: 'PurpleStar',
+    locale: 'en_US',
+    images: [
+      {
+        url: 'https://purplestar.cc/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Is Ziwei Doushu Accurate?',
+      },
+    ],
+    publishedTime: '2026-08-12T00:00:00.000Z',
+    authors: ['PurpleStar'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Is Ziwei Doushu Accurate?',
+    description: 'A critical, evidence-aware discussion of Ziwei Doushu accuracy.',
+    images: ['https://purplestar.cc/og-image.png'],
+  },
   alternates: { canonical: 'https://purplestar.cc/learn/is-ziwei-doushu-accurate/' },
 };
 

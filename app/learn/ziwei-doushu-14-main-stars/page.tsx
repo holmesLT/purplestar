@@ -5,7 +5,30 @@ export const metadata: Metadata = {
   title: 'The 14 Main Stars of Ziwei Doushu: Meanings and Natures',
   description: 'A complete reference for the 14 main stars (主星) of Ziwei Doushu: Ziwei, Tianji, Sun, Wuqu, Tiantong, Lianzheng, Tianfu, Moon, Tanlang, Jumen, Tianxiang, Tianliang, Qisha, Pojun.',
   keywords: ['ziwei 14 main stars', '14 main stars purple star', 'ziwei star meanings', 'tianji wuqu tianfu'],
-  openGraph: { title: 'The 14 Main Stars of Ziwei Doushu', type: 'article' },
+  openGraph: {
+    title: 'The 14 Main Stars of Ziwei Doushu',
+    description: 'A complete reference for the 14 main stars: Ziwei, Tianji, Sun, Wuqu, Tiantong, Lianzheng, Tianfu, Moon, Tanlang, Jumen, Tianxiang, Tianliang, Qisha, Pojun.',
+    type: 'article',
+    url: 'https://purplestar.cc/learn/ziwei-doushu-14-main-stars/',
+    siteName: 'PurpleStar',
+    locale: 'en_US',
+    images: [
+      {
+        url: 'https://purplestar.cc/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'The 14 Main Stars of Ziwei Doushu',
+      },
+    ],
+    publishedTime: '2026-08-12T00:00:00.000Z',
+    authors: ['PurpleStar'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'The 14 Main Stars of Ziwei Doushu',
+    description: 'A complete reference for the 14 main stars of Ziwei Doushu.',
+    images: ['https://purplestar.cc/og-image.png'],
+  },
   alternates: { canonical: 'https://purplestar.cc/learn/ziwei-doushu-14-main-stars/' },
 };
 

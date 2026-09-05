@@ -9,6 +9,25 @@ export const metadata: Metadata = {
     title: 'How to Read a Ziwei Doushu Chart',
     description: 'A beginner-friendly walkthrough of the Ziwei Doushu birth chart.',
     type: 'article',
+    url: 'https://purplestar.cc/learn/how-to-read-purple-star-astrology-chart/',
+    siteName: 'PurpleStar',
+    locale: 'en_US',
+    images: [
+      {
+        url: 'https://purplestar.cc/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'How to Read a Ziwei Doushu Chart',
+      },
+    ],
+    publishedTime: '2026-08-12T00:00:00.000Z',
+    authors: ['PurpleStar'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'How to Read a Ziwei Doushu Chart',
+    description: 'A beginner-friendly walkthrough of the Ziwei Doushu birth chart.',
+    images: ['https://purplestar.cc/og-image.png'],
   },
   alternates: { canonical: 'https://purplestar.cc/learn/how-to-read-purple-star-astrology-chart/' },
 };

@@ -9,6 +9,25 @@ export const metadata: Metadata = {
     title: 'Ziwei Doushu vs Bazi: Which Chinese Astrology System Is Right for You?',
     description: 'A side-by-side comparison of the two most respected Chinese destiny systems.',
     type: 'article',
+    url: 'https://purplestar.cc/learn/ziwei-doushu-vs-bazi/',
+    siteName: 'PurpleStar',
+    locale: 'en_US',
+    images: [
+      {
+        url: 'https://purplestar.cc/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Ziwei Doushu vs Bazi — comparison',
+      },
+    ],
+    publishedTime: '2026-08-12T00:00:00.000Z',
+    authors: ['PurpleStar'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ziwei Doushu vs Bazi: Which Chinese Astrology System Is Right for You?',
+    description: 'A side-by-side comparison of the two most respected Chinese destiny systems.',
+    images: ['https://purplestar.cc/og-image.png'],
   },
   alternates: {
     canonical: 'https://purplestar.cc/learn/ziwei-doushu-vs-bazi/',

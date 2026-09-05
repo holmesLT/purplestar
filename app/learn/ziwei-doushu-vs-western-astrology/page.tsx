@@ -5,7 +5,30 @@ export const metadata: Metadata = {
   title: 'Ziwei Doushu vs Western Astrology: How Do They Compare?',
   description: 'A clear comparison of Ziwei Doushu (Purple Star Astrology) and Western astrology — origins, structure, philosophy, and which one to choose for your first reading.',
   keywords: ['ziwei vs western astrology', 'purple star vs zodiac', 'chinese vs western astrology', 'which astrology system'],
-  openGraph: { title: 'Ziwei Doushu vs Western Astrology', type: 'article' },
+  openGraph: {
+    title: 'Ziwei Doushu vs Western Astrology',
+    description: 'A clear comparison of Ziwei Doushu (Purple Star Astrology) and Western astrology — origins, structure, philosophy, and which to choose for your first reading.',
+    type: 'article',
+    url: 'https://purplestar.cc/learn/ziwei-doushu-vs-western-astrology/',
+    siteName: 'PurpleStar',
+    locale: 'en_US',
+    images: [
+      {
+        url: 'https://purplestar.cc/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Ziwei Doushu vs Western Astrology',
+      },
+    ],
+    publishedTime: '2026-08-12T00:00:00.000Z',
+    authors: ['PurpleStar'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ziwei Doushu vs Western Astrology',
+    description: 'A clear comparison of Chinese and Western astrology.',
+    images: ['https://purplestar.cc/og-image.png'],
+  },
   alternates: { canonical: 'https://purplestar.cc/learn/ziwei-doushu-vs-western-astrology/' },
 };
 

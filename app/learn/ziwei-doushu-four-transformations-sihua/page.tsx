@@ -5,7 +5,30 @@ export const metadata: Metadata = {
   title: 'Ziwei Doushu Four Transformations (Sihua): Lu, Quan, Ke, Ji Explained',
   description: 'A complete guide to the Four Transformations (四化) in Ziwei Doushu: 化禄 Lu, 化权 Quan, 化科 Ke, 化忌 Ji. How they activate palaces and shape your life.',
   keywords: ['four transformations ziwei', 'sihua ziwei', 'hua lu hua ji', 'four transformations sihua meaning'],
-  openGraph: { title: 'Ziwei Doushu Four Transformations (Sihua)', type: 'article' },
+  openGraph: {
+    title: 'Ziwei Doushu Four Transformations (Sihua)',
+    description: 'A complete guide to the Four Transformations (四化): Lu, Quan, Ke, Ji — how they activate palaces and shape your life.',
+    type: 'article',
+    url: 'https://purplestar.cc/learn/ziwei-doushu-four-transformations-sihua/',
+    siteName: 'PurpleStar',
+    locale: 'en_US',
+    images: [
+      {
+        url: 'https://purplestar.cc/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Ziwei Doushu Four Transformations (Sihua)',
+      },
+    ],
+    publishedTime: '2026-08-12T00:00:00.000Z',
+    authors: ['PurpleStar'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ziwei Doushu Four Transformations (Sihua)',
+    description: 'A complete guide to Lu, Quan, Ke, Ji.',
+    images: ['https://purplestar.cc/og-image.png'],
+  },
   alternates: { canonical: 'https://purplestar.cc/learn/ziwei-doushu-four-transformations-sihua/' },
 };
 

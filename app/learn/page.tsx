@@ -6,6 +6,28 @@ export const metadata: Metadata = {
   description: 'In-depth, beginner-friendly guides to Ziwei Doushu (Purple Star Astrology). Learn to read the 12 palaces, 14 main stars, and Four Transformations in your own chart.',
   keywords: ['learn ziwei doushu', 'ziwei doushu guide', 'purple star astrology tutorial'],
   alternates: { canonical: 'https://purplestar.cc/learn/' },
+  openGraph: {
+    title: 'Learn Ziwei Doushu — Free Guides for Beginners & Beyond',
+    description: 'In-depth, beginner-friendly guides to Ziwei Doushu (Purple Star Astrology). Learn the 12 palaces, 14 main stars, and Four Transformations.',
+    type: 'website',
+    url: 'https://purplestar.cc/learn/',
+    siteName: 'PurpleStar',
+    locale: 'en_US',
+    images: [
+      {
+        url: 'https://purplestar.cc/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Learn Ziwei Doushu — Free Guides',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Learn Ziwei Doushu — Free Guides',
+    description: 'In-depth, beginner-friendly guides to Ziwei Doushu (Purple Star Astrology).',
+    images: ['https://purplestar.cc/og-image.png'],
+  },
 };
 
 const ARTICLES = [

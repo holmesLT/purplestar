@@ -5,7 +5,30 @@ export const metadata: Metadata = {
   title: 'Ziwei Doushu Career and Wealth Palace: How It Shapes Your Money Path',
   description: 'How to read the Career Palace (官禄) and Wealth Palace (财帛) in your Ziwei Doushu chart. Discover what stars mean for your vocation and financial destiny.',
   keywords: ['career palace ziwei', 'wealth palace ziwei', 'ziwei career reading', 'ziwei money palace'],
-  openGraph: { title: 'Ziwei Doushu Career and Wealth Palace', type: 'article' },
+  openGraph: {
+    title: 'Ziwei Doushu Career and Wealth Palace',
+    description: 'How to read the Career Palace (官禄) and Wealth Palace (财帛) — what stars mean for your vocation and financial destiny.',
+    type: 'article',
+    url: 'https://purplestar.cc/learn/ziwei-doushu-career-wealth-palace/',
+    siteName: 'PurpleStar',
+    locale: 'en_US',
+    images: [
+      {
+        url: 'https://purplestar.cc/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Ziwei Doushu Career and Wealth Palace',
+      },
+    ],
+    publishedTime: '2026-08-12T00:00:00.000Z',
+    authors: ['PurpleStar'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ziwei Doushu Career and Wealth Palace',
+    description: 'How to read the Career and Wealth Palace in your chart.',
+    images: ['https://purplestar.cc/og-image.png'],
+  },
   alternates: { canonical: 'https://purplestar.cc/learn/ziwei-doushu-career-wealth-palace/' },
 };
 

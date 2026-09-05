@@ -5,7 +5,30 @@ export const metadata: Metadata = {
   title: 'The 12 Life Palaces of Ziwei Doushu Explained',
   description: 'A complete guide to the 12 palaces in Ziwei Doushu: Life, Wealth, Career, Spouse, Children, Health, Travel, Friends, Property, Fortune, Parents, and Siblings.',
   keywords: ['ziwei 12 palaces', 'life palace ziwei', 'wealth palace career palace ziwei', '12 palaces purple star astrology'],
-  openGraph: { title: 'The 12 Life Palaces of Ziwei Doushu', type: 'article' },
+  openGraph: {
+    title: 'The 12 Life Palaces of Ziwei Doushu',
+    description: 'A complete guide to the 12 palaces: Life, Wealth, Career, Spouse, Children, Health, Travel, Friends, Property, Fortune, Parents, and Siblings.',
+    type: 'article',
+    url: 'https://purplestar.cc/learn/ziwei-doushu-12-palaces-explained/',
+    siteName: 'PurpleStar',
+    locale: 'en_US',
+    images: [
+      {
+        url: 'https://purplestar.cc/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'The 12 Life Palaces of Ziwei Doushu',
+      },
+    ],
+    publishedTime: '2026-08-12T00:00:00.000Z',
+    authors: ['PurpleStar'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'The 12 Life Palaces of Ziwei Doushu',
+    description: 'A complete guide to the 12 palaces in Ziwei Doushu.',
+    images: ['https://purplestar.cc/og-image.png'],
+  },
   alternates: { canonical: 'https://purplestar.cc/learn/ziwei-doushu-12-palaces-explained/' },
 };
 
