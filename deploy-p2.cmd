@@ -16,7 +16,7 @@ if errorlevel 1 (
 )
 
 echo === 3. git commit ===
-git commit -m "fix(seo): add trailing slashes to sitemap <loc> + tighten robots disallow"
+git commit -m "fix(seo): explicit Content-Type + cache headers for sitemap.xml and robots.txt"
 if errorlevel 1 (
   echo nothing to commit or commit failed
   exit /b 1
