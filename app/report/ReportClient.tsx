@@ -9,7 +9,7 @@ const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'https://api.purplestar.cc'
 function ReportContent() {
   const searchParams = useSearchParams();
   const chartId = searchParams.get('chartId') || '';
-  const tier = (searchParams.get('tier') as 'basic' | 'premium') || 'basic';
+  const tierParam = searchParams.get('tier');
   const sessionId = searchParams.get('session_id');
   const nowpaymentsPaymentId = searchParams.get('nowpayments_payment_id');
   const selfCryptoOrderId = searchParams.get('self_crypto_order_id');
@@ -22,7 +22,14 @@ function ReportContent() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // 1) 从 URL hash 取 chart
+    // 支付来源至少要有一个
+    if (!sessionId && !nowpaymentsPaymentId && !selfCryptoOrderId) {
+      setError('No payment session. Please complete checkout first.');
+      setLoading(false);
+      return;
+    }
+
+    // 1) 优先从 URL hash 取 chart(老路径,某些 client page 还可能在用)
     const hash = window.location.hash.replace(/^#/, '');
     let chartData: any = null;
     if (hash) {
@@ -32,26 +39,37 @@ function ReportContent() {
       } catch {}
     }
 
-    // 2) 验证支付 + 生成解读(支持 Stripe + NOWPayments + 自托管 XRP)
-    if (!sessionId && !nowpaymentsPaymentId && !selfCryptoOrderId) {
-      setError('No payment session. Please complete checkout first.');
-      setLoading(false);
-      return;
+    // 2) 如果没有 hash 但有 session_id,直接从 server 拿(新路径)
+    //    server 在 Stripe webhook 里已经把 chart 写到 orders.chart_id 关联的 charts 行
+    async function loadChartFromServer(sid: string) {
+      const r = await fetch(`${API_BASE}/api/chart/by-session/${sid}`);
+      if (!r.ok) throw new Error(`Chart not found for this payment (${r.status})`);
+      return r.json();
     }
 
-    const body: any = { chart: chartData, chartId, tier };
-    if (sessionId) body.sessionId = sessionId;
-    if (nowpaymentsPaymentId) body.nowpaymentsPaymentId = nowpaymentsPaymentId;
-    if (selfCryptoOrderId) body.selfCryptoOrderId = selfCryptoOrderId;
+    const chartPromise = (async () => {
+      if (!chartData && sessionId) {
+        chartData = await loadChartFromServer(sessionId);
+        setChart(chartData);
+      }
+      return chartData;
+    })();
 
-    fetch(`${API_BASE}/api/interpret`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    })
+    // 3) 验证支付 + 生成解读(支持 Stripe + NOWPayments + 自托管 XRP)
+    chartPromise
+      .then((cd) => {
+        const body: any = { chart: cd, chartId, tier: tierParam || (cd && cd.tier) };
+        if (sessionId) body.sessionId = sessionId;
+        if (nowpaymentsPaymentId) body.nowpaymentsPaymentId = nowpaymentsPaymentId;
+        if (selfCryptoOrderId) body.selfCryptoOrderId = selfCryptoOrderId;
+        return fetch(`${API_BASE}/api/interpret`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+      })
       .then(r => {
         if (!r.ok) {
-          // 解析 worker 返回的 JSON 错误体,把真实原因带回来
           return r.json().then(body => {
             throw new Error(body?.error || `Server returned ${r.status}`);
           }).catch(() => {
@@ -63,7 +81,7 @@ function ReportContent() {
       .then(data => setReading(data.reading))
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
-  }, [tier, sessionId, nowpaymentsPaymentId, selfCryptoOrderId, chartId]);
+  }, [tierParam, sessionId, nowpaymentsPaymentId, selfCryptoOrderId, chartId]);
 
   if (loading) {
     return (
@@ -73,7 +91,7 @@ function ReportContent() {
             Channeling the Stars…
           </div>
           <p className="text-imperial-parchment/60 text-sm">
-            Our AI astrologer is composing your {tier === 'premium' ? 'comprehensive' : 'focused'} reading.
+            Our AI astrologer is composing your reading.
             This usually takes 10-30 seconds.
           </p>
         </div>
@@ -99,7 +117,7 @@ function ReportContent() {
     <main className="min-h-screen px-6 py-12 max-w-4xl mx-auto">
       <div className="mb-8 text-center">
         <div className="text-xs tracking-[0.3em] text-imperial-gold uppercase mb-2">
-          {tier === 'premium' ? 'Premium Full Report' : 'AI Reading'}
+          Destiny Reading
         </div>
         <h1 className="font-display text-4xl md:text-5xl mb-4">
           Your Destiny Reading
@@ -122,11 +140,9 @@ function ReportContent() {
         <p className="text-imperial-parchment/60 text-sm mb-4">
           Want an even deeper reading?
         </p>
-        {tier === 'basic' && (
-          <a href="/" className="gold-btn inline-block">
-            Generate Another Chart
-          </a>
-        )}
+        <a href="/" className="gold-btn inline-block">
+          Generate Another Chart
+        </a>
         <div className="mt-6 text-xs text-imperial-parchment/40">
           Powered by Claude AI · Based on the Ni Haixia Tianji Ziwei Doushu lineage
         </div>

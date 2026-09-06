@@ -1,0 +1,25 @@
+{
+  "name": "PurpleStar — Ziwei Doushu Reading",
+  "short_name": "PurpleStar",
+  "description": "Free Ziwei Doushu (Purple Star Astrology) birth chart + AI-powered life reading.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a0420",
+  "theme_color": "#e8c870",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

@@ -72,10 +72,6 @@ const ORGANIZATION_SCHEMA = {
 // Format: always "ca-pub-XXXXXXXXXXXXXXXX" (ca- prefix required by ads.txt & ad tag).
 const ADSENSE_PUBLISHER_ID = 'ca-pub-9378214644556482';
 
-// Yandex Metrica counter ID (8-digit number from https://metrica.yandex.com).
-// Leave empty string if not configured yet — Yandex tracking will be skipped.
-const YANDEX_METRICA_ID = process.env.NEXT_PUBLIC_YANDEX_METRICA_ID || '';
-
 export default function RootLayout({
   children,
 }: {
@@ -84,6 +80,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -124,46 +122,6 @@ export default function RootLayout({
             __html: `(adsbygoogle = window.adsbygoogle || []).push({ google_ad_client: "${ADSENSE_PUBLISHER_ID}", enable_page_level_ads: true });`,
           }}
         />
-
-        {/* === Yandex.Metrika counter === */}
-        {/* Only renders when NEXT_PUBLIC_YANDEX_METRICA_ID env var is set.
-            Uses native <script> with dangerouslySetInnerHTML (NOT next/script) because
-            Next.js Script with inline content queues execution behind hydration;
-            we need the metrika loader to run as soon as HTML parses so the page-view
-            hit reaches Yandex before users navigate away. Get your counter ID from
-            https://metrica.yandex.com (8-digit number). */}
-        {YANDEX_METRICA_ID && (
-          <>
-            <script
-              type="text/javascript"
-              dangerouslySetInnerHTML={{
-                __html: `
-                  (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-                  m[i].l=1*new Date();
-                  for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-                  k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-                  (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-                  ym(${YANDEX_METRICA_ID}, "init", {
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true,
-                    webvisor:true
-                  });
-                `,
-              }}
-            />
-            <noscript>
-              <div>
-                <img
-                  src={`https://mc.yandex.ru/watch/${YANDEX_METRICA_ID}`}
-                  style={{ position: 'absolute', left: '-9999px' }}
-                  alt=""
-                />
-              </div>
-            </noscript>
-          </>
-        )}
       </body>
     </html>
   );

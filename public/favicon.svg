@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!--
+    PurpleStar favicon.
+    Imperial purple background with a stylised 14-point star (the central 紫微
+    disc + the 14 main stars are a recurring motif). Single file, scales to any
+    size, no raster assets needed.
+  -->
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#3a1a6b"/>
+      <stop offset="100%" stop-color="#0a0420"/>
+    </radialGradient>
+    <linearGradient id="star" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff3c4"/>
+      <stop offset="100%" stop-color="#e8c870"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="12" fill="url(#bg)"/>
+
+  <!-- 8-point star = 紫微 disc + 14 main stars motif, simplified -->
+  <g transform="translate(32 32)" fill="url(#star)">
+    <path d="M0 -22 L4 -7 L20 0 L4 7 L0 22 L-4 7 L-20 0 L-4 -7 Z"/>
+    <circle r="3.5" fill="#fff3c4"/>
+  </g>
+
+  <!-- Tiny accent stars -->
+  <circle cx="10" cy="12" r="1" fill="#e8c870" opacity="0.8"/>
+  <circle cx="54" cy="14" r="1.2" fill="#e8c870" opacity="0.7"/>
+  <circle cx="12" cy="52" r="0.9" fill="#e8c870" opacity="0.6"/>
+  <circle cx="52" cy="50" r="1.1" fill="#e8c870" opacity="0.8"/>
+</svg>

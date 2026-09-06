@@ -201,11 +201,12 @@ function PayCard({
   const [error, setError] = useState<string | null>(null);
 
   async function handleCheckout() {
-    // 用 sessionStorage 把 chartId 带到 Stripe 跳回后(Payment Link 不支持自定义 metadata)
     setLoading(true);
     try {
+      // client_reference_id 是 Payment Link 唯一能带自定义数据的方式,
+      // worker 从 checkout session 读回 chartId 来关联订单与排盘。
       sessionStorage.setItem('pendingChart', JSON.stringify({ chartId, tier }));
-      window.location.href = PAYMENT_LINKS[tier];
+      window.location.href = `${PAYMENT_LINKS[tier]}?client_reference_id=${encodeURIComponent(chartId)}`;
     } catch (err: any) {
       setError(err.message);
       setLoading(false);

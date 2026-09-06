@@ -3,6 +3,8 @@
 import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'https://api.purplestar.cc';
+
 function PaymentReturnContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -13,40 +15,16 @@ function PaymentReturnContent() {
     if (typeof window === 'undefined') return;
 
     const sessionId = searchParams.get('session_id');
-    const tier = searchParams.get('tier') as 'basic' | 'premium' | null;
 
     if (!sessionId) {
       setStatus('error');
       setErrorMsg('Missing session_id from Stripe. Please return to the home page and try again.');
       return;
     }
-    if (!tier || (tier !== 'basic' && tier !== 'premium')) {
-      setStatus('error');
-      setErrorMsg('Invalid or missing tier. Please return to the home page and try again.');
-      return;
-    }
 
-    // 从 sessionStorage 拿之前存的 chartId
-    let chartId: string | null = null;
-    try {
-      const raw = sessionStorage.getItem('pendingChart');
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        chartId = parsed.chartId;
-        // 立即清理，避免污染下次访问
-        sessionStorage.removeItem('pendingChart');
-      }
-    } catch {}
-
-    if (!chartId) {
-      // Fallback: 没有 sessionStorage（用户开了新窗口/incognito），用 sessionId 让 /report 重新生成时让用户重选
-      setStatus('error');
-      setErrorMsg('Your chart selection was lost (browser session expired or new window). Please regenerate your chart and try again.');
-      return;
-    }
-
-    // 跳到 /report，让它从 Stripe API 校验 + 拉 chart + 调 Claude
-    router.replace(`/report?chartId=${chartId}&tier=${tier}&session_id=${sessionId}`);
+    // 跳到 /report,让 server 端根据 session_id 反查 chart + tier
+    // (不再依赖 sessionStorage,跨窗口/隐私模式都安全)
+    router.replace(`/report?session_id=${sessionId}`);
   }, [router, searchParams]);
 
   if (status === 'error') {
