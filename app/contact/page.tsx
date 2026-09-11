@@ -27,21 +27,21 @@ export default function ContactPage() {
         <ul className="mb-6 space-y-2 leading-relaxed">
           <li>
             <strong>General support &amp; feedback:</strong>{' '}
-            <a href="mailto:support@purplestar.cc" className="text-imperial-gold hover:underline">
-              support@purplestar.cc
+            <a href="mailto:rkotsvm@gmail.com" className="text-imperial-gold hover:underline">
+              rkotsvm@gmail.com
             </a>
           </li>
           <li>
             <strong>Payment &amp; billing issues:</strong>{' '}
-            <a href="mailto:support@purplestar.cc" className="text-imperial-gold hover:underline">
-              support@purplestar.cc
+            <a href="mailto:rkotsvm@gmail.com" className="text-imperial-gold hover:underline">
+              rkotsvm@gmail.com
             </a>{' '}
             (subject line: &quot;Payment&quot; + your order reference)
           </li>
           <li>
             <strong>Privacy &amp; data requests (access, export, deletion):</strong>{' '}
-            <a href="mailto:support@purplestar.cc" className="text-imperial-gold hover:underline">
-              support@purplestar.cc
+            <a href="mailto:rkotsvm@gmail.com" className="text-imperial-gold hover:underline">
+              rkotsvm@gmail.com
             </a>{' '}
             (subject line: &quot;Privacy Request&quot;)
           </li>
