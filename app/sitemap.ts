@@ -1,13 +1,15 @@
 import type { MetadataRoute } from 'next';
+import { STARS } from '@/lib/stars-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://purplestar.cc';
 
   // Fixed publication dates — keeps sitemap stable across rebuilds
   // so Googlebot sees a consistent lastmod per URL.
-  const homepageLastmod = new Date('2026-08-13T00:00:00.000Z');
+  const homepageLastmod = new Date('2026-09-12T00:00:00.000Z');
   const learnHubLastmod = new Date('2026-08-13T00:00:00.000Z');
   const articlesLastmod = new Date('2026-08-12T00:00:00.000Z');
+  const starsLastmod = new Date('2026-09-12T00:00:00.000Z');
 
   const learnPages = [
     { slug: 'ziwei-doushu-vs-bazi', priority: 0.9 },
@@ -18,6 +20,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { slug: 'ziwei-doushu-vs-western-astrology', priority: 0.8 },
     { slug: 'is-ziwei-doushu-accurate', priority: 0.75 },
     { slug: 'ziwei-doushu-four-transformations-sihua', priority: 0.8 },
+  ];
+
+  const trustPages = [
+    { path: '/about/', priority: 0.3 },
+    { path: '/contact/', priority: 0.3 },
+    { path: '/privacy-policy/', priority: 0.3 },
+    { path: '/terms-of-service/', priority: 0.3 },
   ];
 
   return [
@@ -37,6 +46,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/learn/${slug}/`,
       lastModified: articlesLastmod,
       changeFrequency: 'monthly' as const,
+      priority,
+    })),
+    {
+      url: `${baseUrl}/stars/`,
+      lastModified: starsLastmod,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    ...STARS.map((star) => ({
+      url: `${baseUrl}/stars/${star.slug}/`,
+      lastModified: starsLastmod,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
+    ...trustPages.map(({ path, priority }) => ({
+      url: `${baseUrl}${path}`,
+      lastModified: starsLastmod,
+      changeFrequency: 'yearly' as const,
       priority,
     })),
   ];

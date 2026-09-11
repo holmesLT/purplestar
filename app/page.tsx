@@ -162,13 +162,14 @@ export default function HomePage() {
           Learn Ziwei Doushu
         </h2>
         <p className="text-center text-imperial-parchment/70 mb-10 max-w-2xl mx-auto">
-          Eight in-depth guides to read your own chart — palaces, stars, transformations, and how Ziwei compares to other systems.
+          Free guides to read your own chart — palaces, stars, transformations, and how Ziwei compares to other systems.
         </p>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             { href: '/learn/how-to-read-purple-star-astrology-chart/', title: 'How to Read a Ziwei Chart', tag: 'Beginner' },
             { href: '/learn/ziwei-doushu-12-palaces-explained/', title: 'The 12 Life Palaces', tag: 'Foundations' },
             { href: '/learn/ziwei-doushu-14-main-stars/', title: 'The 14 Main Stars', tag: 'Foundations' },
+            { href: '/stars/', title: 'Star Encyclopedia: All 14 Stars', tag: 'Encyclopedia' },
             { href: '/learn/ziwei-doushu-four-transformations-sihua/', title: 'Four Transformations', tag: 'Core' },
             { href: '/learn/ziwei-doushu-career-wealth-palace/', title: 'Career & Wealth Palace', tag: 'Practical' },
             { href: '/learn/ziwei-doushu-vs-bazi/', title: 'Ziwei vs Bazi', tag: 'Comparison' },
@@ -192,6 +193,14 @@ export default function HomePage() {
       </section>
 
       <footer className="px-6 py-8 max-w-6xl mx-auto text-center border-t border-imperial-gold/20 mt-4">
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-imperial-parchment/60 mb-4">
+          <Link href="/stars/" className="hover:text-imperial-gold">The 14 Stars</Link>
+          <Link href="/learn/" className="hover:text-imperial-gold">Learn</Link>
+          <Link href="/about" className="hover:text-imperial-gold">About</Link>
+          <Link href="/contact" className="hover:text-imperial-gold">Contact</Link>
+          <Link href="/privacy-policy" className="hover:text-imperial-gold">Privacy Policy</Link>
+          <Link href="/terms-of-service" className="hover:text-imperial-gold">Terms of Service</Link>
+        </div>
         <p className="text-xs text-imperial-parchment/50">
           This project uses the{' '}
           <a

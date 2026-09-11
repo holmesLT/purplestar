@@ -34,6 +34,7 @@ const ARTICLES = [
   { href: '/learn/how-to-read-purple-star-astrology-chart/', title: 'How to Read a Ziwei Chart (Step by Step)', tag: 'Beginner', desc: 'A 5-step walkthrough for absolute beginners.' },
   { href: '/learn/ziwei-doushu-12-palaces-explained/', title: 'The 12 Life Palaces Explained', tag: 'Foundations', desc: 'Each palace and what it governs in your life.' },
   { href: '/learn/ziwei-doushu-14-main-stars/', title: 'The 14 Main Stars', tag: 'Foundations', desc: 'Ziwei, Tianji, Sun, Wuqu, and all the rest.' },
+  { href: '/stars/', title: 'Star Encyclopedia: All 14 Stars', tag: 'Foundations', desc: 'A full page on every main star — personality, career, love, palaces.' },
   { href: '/learn/ziwei-doushu-four-transformations-sihua/', title: 'The Four Transformations (Sihua)', tag: 'Core', desc: 'Lu, Quan, Ke, Ji — the engine of the chart.' },
   { href: '/learn/ziwei-doushu-career-wealth-palace/', title: 'Career & Wealth Palace', tag: 'Practical', desc: 'Read your money path and vocational destiny.' },
   { href: '/learn/ziwei-doushu-vs-bazi/', title: 'Ziwei Doushu vs Bazi', tag: 'Comparison', desc: 'Two Chinese systems, side by side.' },
@@ -52,7 +53,7 @@ export default function LearnIndex() {
         <div className="text-xs tracking-[0.3em] text-imperial-gold uppercase mb-3">Learn</div>
         <h1 className="font-display text-4xl md:text-6xl mb-4">Master Your Ziwei Doushu Chart</h1>
         <p className="text-imperial-parchment/70 text-lg max-w-2xl mx-auto">
-          Eight free guides to the most sophisticated Chinese birth chart system.
+          Free guides to the most sophisticated Chinese birth chart system.
           Read them in order, or jump to the topic that interests you.
         </p>
       </header>

@@ -56,50 +56,50 @@ export default function Article() {
 
         <h2 className="font-display text-3xl mt-10 mb-4 text-imperial-gold">The Imperial Family (紫微星系)</h2>
 
-        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold">紫微 (Ziwei) — The Emperor</h3>
+        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold"><Link href="/stars/zi-wei/" className="hover:underline">紫微 (Ziwei) — The Emperor</Link> →</h3>
         <p className="mb-4 leading-relaxed">Authority, leadership, nobility. People with Ziwei in their Life Palace tend to be decisive, dignified, and gravitate toward responsibility. Their shadow: stubbornness and loneliness at the top.</p>
 
-        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold">天机 (Tianji) — The Advisor</h3>
+        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold"><Link href="/stars/tian-ji/" className="hover:underline">天机 (Tianji) — The Advisor</Link> →</h3>
         <p className="mb-4 leading-relaxed">Intellect, strategy, planning. Tianji people are quick-minded, analytical, and thrive on solving complex problems. Their shadow: overthinking and anxiety.</p>
 
-        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold">太阳 (Sun) — The Father Star</h3>
+        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold"><Link href="/stars/tai-yang/" className="hover:underline">太阳 (Sun) — The Father Star</Link> →</h3>
         <p className="mb-4 leading-relaxed">Generosity, public visibility, brightness. Sun people radiate warmth and naturally attract followers. Their shadow: burning out from giving too much.</p>
 
-        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold">武曲 (Wuqu) — The General</h3>
+        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold"><Link href="/stars/wu-qu/" className="hover:underline">武曲 (Wuqu) — The General</Link> →</h3>
         <p className="mb-4 leading-relaxed">Decisiveness, financial acumen, metal energy. Wuqu people are sharp, focused, and excel at wealth-building through action. Their shadow: rigidity and impatience.</p>
 
-        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold">天同 (Tiantong) — The Joyful</h3>
+        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold"><Link href="/stars/tian-tong/" className="hover:underline">天同 (Tiantong) — The Joyful</Link> →</h3>
         <p className="mb-4 leading-relaxed">Harmony, contentment, childlike nature. Tiantong people are kind, easygoing, and bring peace to those around them. Their shadow: passivity and avoidance of conflict.</p>
 
-        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold">廉贞 (Lianzheng) — The Deputy</h3>
+        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold"><Link href="/stars/lian-zhen/" className="hover:underline">廉贞 (Lianzheng) — The Deputy</Link> →</h3>
         <p className="mb-4 leading-relaxed">Passion, complexity, transformation. Lianzheng people are magnetic, intense, and often experience dramatic life cycles. Their shadow: impulsiveness and entanglements.</p>
 
         <h2 className="font-display text-3xl mt-10 mb-4 text-imperial-gold">The Treasury Family (天府星系)</h2>
 
-        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold">天府 (Tianfu) — The Treasury</h3>
+        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold"><Link href="/stars/tian-fu/" className="hover:underline">天府 (Tianfu) — The Treasury</Link> →</h3>
         <p className="mb-4 leading-relaxed">Stability, refinement, wealth storage. Tianfu people are tasteful, reliable, and good with resources. Their shadow: conservatism and resistance to change.</p>
 
-        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold">太阴 (Moon) — The Mother Star</h3>
+        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold"><Link href="/stars/tai-yin/" className="hover:underline">太阴 (Moon) — The Mother Star</Link> →</h3>
         <p className="mb-4 leading-relaxed">Intuition, nurturing, inner life. Moon people are perceptive, emotionally rich, and excellent at reading rooms. Their shadow: moodiness and withdrawal.</p>
 
-        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold">贪狼 (Tanlang) — The Wolf</h3>
+        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold"><Link href="/stars/tan-lang/" className="hover:underline">贪狼 (Tanlang) — The Wolf</Link> →</h3>
         <p className="mb-4 leading-relaxed">Ambition, desire, multi-talent. Tanlang people are charismatic, driven, and often skilled in many fields. Their shadow: greed and scattered energy.</p>
 
-        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold">巨门 (Jumen) — The Gate</h3>
+        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold"><Link href="/stars/ju-men/" className="hover:underline">巨门 (Jumen) — The Gate</Link> →</h3>
         <p className="mb-4 leading-relaxed">Eloquence, controversy, investigation. Jumen people are articulate, sharp, and unafraid to ask hard questions. Their shadow: argumentativeness and suspicion.</p>
 
-        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold">天相 (Tianxiang) — The Minister</h3>
+        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold"><Link href="/stars/tian-xiang/" className="hover:underline">天相 (Tianxiang) — The Minister</Link> →</h3>
         <p className="mb-4 leading-relaxed">Support, aesthetics, diplomacy. Tianxiang people are gracious, tasteful, and excel at building bridges. Their shadow: indecisiveness and over-accommodation.</p>
 
-        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold">天梁 (Tianliang) — The Elder</h3>
+        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold"><Link href="/stars/tian-liang/" className="hover:underline">天梁 (Tianliang) — The Elder</Link> →</h3>
         <p className="mb-4 leading-relaxed">Protection, wisdom, longevity. Tianliang people are mature, reliable, and naturally mentor others. Their shadow: preachy and overprotective.</p>
 
         <h2 className="font-display text-3xl mt-10 mb-4 text-imperial-gold">The Warrior Family (杀破狼系)</h2>
 
-        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold">七杀 (Qisha) — Seven Killings</h3>
+        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold"><Link href="/stars/qi-sha/" className="hover:underline">七杀 (Qisha) — Seven Killings</Link> →</h3>
         <p className="mb-4 leading-relaxed">Military prowess, independence, courage. Qisha people are bold, decisive, and thrive under pressure. Their shadow: recklessness and isolation.</p>
 
-        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold">破军 (Pojun) — Army Breaker</h3>
+        <h3 className="font-display text-2xl mt-6 mb-2 text-imperial-gold"><Link href="/stars/po-jun/" className="hover:underline">破军 (Pojun) — Army Breaker</Link> →</h3>
         <p className="mb-4 leading-relaxed">Innovation, destruction-rebirth, unpredictability. Pojun people are agents of change, often disrupting established patterns. Their shadow: chaos and instability.</p>
 
         <h2 className="font-display text-3xl mt-10 mb-4 text-imperial-gold">Why stars have "natures", not labels</h2>
