@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Is Ziwei Doushu Accurate? A Honest Look at the Evidence',
-  description: 'A critical, evidence-aware discussion of Ziwei Doushu accuracy. How the system works, what it can and cannot tell you, and how to approach a reading responsibly.',
+  description: 'A critical look at Ziwei Doushu accuracy: how the system works, what it can and cannot tell you, and how to read responsibly.',
   keywords: ['is ziwei doushu accurate', 'ziwei doushu accuracy', 'does purple star astrology work', 'ziwei doushu scientific'],
   openGraph: {
     title: 'Is Ziwei Doushu Accurate? An Honest Investigation',

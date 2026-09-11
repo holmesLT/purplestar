@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Learn Ziwei Doushu — Free Guides for Beginners & Beyond',
-  description: 'In-depth, beginner-friendly guides to Ziwei Doushu (Purple Star Astrology). Learn to read the 12 palaces, 14 main stars, and Four Transformations in your own chart.',
+  description: 'Beginner-friendly guides to Ziwei Doushu: the 12 palaces, 14 main stars, and Four Transformations, explained for your own chart.',
   keywords: ['learn ziwei doushu', 'ziwei doushu guide', 'purple star astrology tutorial'],
   alternates: { canonical: 'https://purplestar.cc/learn/' },
   openGraph: {

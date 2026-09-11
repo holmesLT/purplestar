@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'How to Read a Ziwei Doushu Chart: Step-by-Step Guide for Beginners',
-  description: 'Learn how to read a Ziwei Doushu (Purple Star Astrology) birth chart in 5 simple steps. Understand palaces, main stars, the Four Transformations, and what they mean for your life.',
+  description: 'Learn to read a Ziwei Doushu birth chart in 5 steps: palaces, main stars, and the Four Transformations, explained for your life.',
   keywords: ['how to read ziwei doushu', 'ziwei chart reading', 'purple star astrology chart explained', 'ziwei chart for beginners'],
   openGraph: {
     title: 'How to Read a Ziwei Doushu Chart',

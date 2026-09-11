@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'The 14 Main Stars of Ziwei Doushu: Meanings and Natures',
-  description: 'A complete reference for the 14 main stars (主星) of Ziwei Doushu: Ziwei, Tianji, Sun, Wuqu, Tiantong, Lianzheng, Tianfu, Moon, Tanlang, Jumen, Tianxiang, Tianliang, Qisha, Pojun.',
+  description: 'The 14 main stars of Ziwei Doushu explained: Ziwei, Tianji, Sun, Wuqu, Tanlang, Jumen, Qisha, Pojun and more.',
   keywords: ['ziwei 14 main stars', '14 main stars purple star', 'ziwei star meanings', 'tianji wuqu tianfu'],
   openGraph: {
     title: 'The 14 Main Stars of Ziwei Doushu',

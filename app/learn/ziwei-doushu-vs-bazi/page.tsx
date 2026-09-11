@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Ziwei Doushu vs Bazi: Which Chinese Astrology System Is Right for You?',
-  description: 'A detailed comparison of Ziwei Doushu (Purple Star Astrology) and Bazi (Four Pillars). Learn the differences, strengths, and use cases of each system — and how to choose.',
+  description: 'Ziwei Doushu vs Bazi compared: the differences, strengths, and use cases of each Chinese destiny system — and how to choose.',
   keywords: ['ziwei doushu vs bazi', 'ziwei vs bazi', 'chinese astrology comparison', 'four pillars vs purple star'],
   openGraph: {
     title: 'Ziwei Doushu vs Bazi: Which Chinese Astrology System Is Right for You?',

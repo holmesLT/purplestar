@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Ziwei Doushu vs Western Astrology: How Do They Compare?',
-  description: 'A clear comparison of Ziwei Doushu (Purple Star Astrology) and Western astrology — origins, structure, philosophy, and which one to choose for your first reading.',
+  description: 'Ziwei Doushu vs Western astrology: origins, structure, and philosophy compared — which to choose for your first reading.',
   keywords: ['ziwei vs western astrology', 'purple star vs zodiac', 'chinese vs western astrology', 'which astrology system'],
   openGraph: {
     title: 'Ziwei Doushu vs Western Astrology',
@@ -139,7 +139,7 @@ export default function Article() {
         '@context': 'https://schema.org',
         '@type': 'TechArticle',
         headline: 'Ziwei Doushu vs Western Astrology: How Do They Compare?',
-        description: 'A clear comparison of Ziwei Doushu (Purple Star Astrology) and Western astrology — origins, structure, philosophy, and which one to choose for your first reading.',
+        description: 'Ziwei Doushu vs Western astrology: origins, structure, and philosophy compared — which to choose for your first reading.',
         mainEntityOfPage: {
           '@type': 'WebPage',
           '@id': 'https://purplestar.cc/learn/ziwei-doushu-vs-western-astrology/',

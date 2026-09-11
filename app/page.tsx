@@ -5,7 +5,7 @@ import ChartForm from '@/components/ChartForm';
 export const metadata: Metadata = {
   title: 'PurpleStar — Your Destiny Written in the Stars of the East',
   description:
-    'Discover your destiny with Ziwei Doushu (Purple Star Astrology), the most sophisticated Chinese birth chart system — refined over 1,000 years. Get your free chart and AI-powered life reading.',
+    'Free Ziwei Doushu birth chart with AI-powered reading. The most sophisticated Chinese astrology system, refined over 1,000 years.',
   alternates: {
     canonical: 'https://purplestar.cc/',
   },
