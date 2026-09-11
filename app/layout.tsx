@@ -95,6 +95,9 @@ export default function RootLayout({
         {/* === Baidu Webmaster Verification === */}
         <meta name="baidu-site-verification" content="codeva-31owVYm7Md" />
 
+        {/* === Pinterest Domain Verification === */}
+        <meta name="p:domain_verify" content="83eee5fe76e89e4a0dcd11a94c454046" />
+
         {/* === Google AdSense Auto Ads === */}
         {/* Loads the AdSense library. Must be in <head> and use async + crossOrigin="anonymous". */}
         <Script
