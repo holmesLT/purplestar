@@ -38,7 +38,7 @@ const KEY_LOCATION = `https://${SITE_HOST}/${INDEXNOW_KEY}.txt`;
 const INDEXNOW_ENDPOINT = 'https://api.indexnow.org/indexnow';
 
 // Canonical URL list — kept in sync with app/sitemap.ts + tools/indexnow_push.py
-// Order: home → learn index → 8 learn articles (most SEO-important first).
+// Order: home → learn index → 8 learn articles → star encyclopedia (most SEO-important first).
 const DEFAULT_URLS = [
   `https://${SITE_HOST}/`,
   `https://${SITE_HOST}/learn/`,
@@ -50,6 +50,21 @@ const DEFAULT_URLS = [
   `https://${SITE_HOST}/learn/ziwei-doushu-vs-bazi/`,
   `https://${SITE_HOST}/learn/ziwei-doushu-vs-western-astrology/`,
   `https://${SITE_HOST}/learn/is-ziwei-doushu-accurate/`,
+  `https://${SITE_HOST}/stars/`,
+  `https://${SITE_HOST}/stars/zi-wei/`,
+  `https://${SITE_HOST}/stars/tian-ji/`,
+  `https://${SITE_HOST}/stars/tai-yang/`,
+  `https://${SITE_HOST}/stars/wu-qu/`,
+  `https://${SITE_HOST}/stars/tian-tong/`,
+  `https://${SITE_HOST}/stars/lian-zhen/`,
+  `https://${SITE_HOST}/stars/tian-fu/`,
+  `https://${SITE_HOST}/stars/tai-yin/`,
+  `https://${SITE_HOST}/stars/tan-lang/`,
+  `https://${SITE_HOST}/stars/ju-men/`,
+  `https://${SITE_HOST}/stars/tian-xiang/`,
+  `https://${SITE_HOST}/stars/tian-liang/`,
+  `https://${SITE_HOST}/stars/qi-sha/`,
+  `https://${SITE_HOST}/stars/po-jun/`,
 ];
 
 const CORS_HEADERS = {

@@ -24,9 +24,11 @@ const SITE_HOST = 'https://purplestar.cc';
 // Lastmod timestamps — fixed (no auto-regeneration per request) so Google
 // sees a consistent sitemap across refreshes. Update manually when articles
 // are actually edited.
-const HOMEPAGE_LASTMOD = '2026-08-13';
+const HOMEPAGE_LASTMOD = '2026-09-12';
 const LEARN_HUB_LASTMOD = '2026-08-13';
 const ARTICLES_LASTMOD = '2026-08-12';
+const STARS_LASTMOD = '2026-09-12';
+const TRUST_LASTMOD = '2026-09-12';
 
 const LEARN_PAGES = [
   { slug: 'ziwei-doushu-vs-bazi', priority: 0.9 },
@@ -58,6 +60,41 @@ function buildSitemap() {
       lastmod: ARTICLES_LASTMOD,
       changefreq: 'monthly',
       priority: priority.toFixed(1),
+    })),
+    {
+      loc: `${SITE_HOST}/stars/`,
+      lastmod: STARS_LASTMOD,
+      changefreq: 'weekly',
+      priority: '0.8',
+    },
+    // Star slugs kept in sync with lib/stars-data.ts (via app/sitemap.ts).
+    ...[
+      'zi-wei',
+      'tian-ji',
+      'tai-yang',
+      'wu-qu',
+      'tian-tong',
+      'lian-zhen',
+      'tian-fu',
+      'tai-yin',
+      'tan-lang',
+      'ju-men',
+      'tian-xiang',
+      'tian-liang',
+      'qi-sha',
+      'po-jun',
+    ].map((slug) => ({
+      loc: `${SITE_HOST}/stars/${slug}/`,
+      lastmod: STARS_LASTMOD,
+      changefreq: 'monthly',
+      priority: '0.8',
+    })),
+    // Trust pages — required for AdSense review and user trust.
+    ...['/about/', '/contact/', '/privacy-policy/', '/terms-of-service/'].map((path) => ({
+      loc: `${SITE_HOST}${path}`,
+      lastmod: TRUST_LASTMOD,
+      changefreq: 'yearly',
+      priority: '0.3',
     })),
   ];
 
