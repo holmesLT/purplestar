@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -101,13 +100,17 @@ export default function RootLayout({
         {/* === Cryptomus Domain Verification === */}
         <meta name="cryptomus" content="5988eb33" />
 
+        {/* === Google AdSense ownership verification (meta method) === */}
+        <meta name="google-adsense-account" content={ADSENSE_PUBLISHER_ID} />
+
         {/* === Google AdSense Auto Ads === */}
-        {/* Loads the AdSense library. Must be in <head> and use async + crossOrigin="anonymous". */}
-        <Script
+        {/* Native <script> (not next/script): afterInteractive only emits a preload link in the
+            static export, the real tag is injected after hydration — which AdSense's
+            non-JS verification crawler never sees. A raw tag stays in the served HTML. */}
+        <script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}`}
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
       </head>
       <body>
