@@ -213,6 +213,32 @@ function PayCard({
     }
   }
 
+  async function handleCryptoCheckout() {
+    setLoading(true);
+    setError(null);
+    try {
+      sessionStorage.setItem('pendingChart', JSON.stringify({ chartId, tier }));
+      const resp = await fetch(`${API_BASE}/api/crypto/create-payment`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tier, chartId }),
+      });
+      const data: any = await resp.json();
+      if (!resp.ok || !data.ok || !data.invoice_url) {
+        throw new Error(data.error || 'Could not start crypto payment. Please try card payment.');
+      }
+      sessionStorage.setItem(
+        'pendingCryptoPayment',
+        JSON.stringify({ order_id: data.order_id, tier, expires_at: data.expires_at })
+      );
+      // Cryptomus 托管收银台:用户自选币种/网络,支付后回到 payment-return-crypto
+      window.location.href = data.invoice_url;
+    } catch (err: any) {
+      setError(err.message);
+      setLoading(false);
+    }
+  }
+
   return (
     <div
       className={`rounded-xl p-6 border-2 ${
@@ -259,6 +285,13 @@ function PayCard({
         className="gold-btn w-full disabled:opacity-50"
       >
         {loading ? 'Loading…' : '💳 Pay with Card (Stripe)'}
+      </button>
+      <button
+        onClick={handleCryptoCheckout}
+        disabled={loading}
+        className="mt-2 w-full text-sm px-4 py-2.5 rounded-lg border border-imperial-gold/40 text-imperial-gold hover:bg-imperial-gold/10 transition-colors disabled:opacity-50"
+      >
+        {loading ? 'Loading…' : '🪙 Pay with Crypto (USDT, BTC, ETH…)'}
       </button>
       {error && (
         <div className="mt-2 text-xs text-red-400">{error}</div>

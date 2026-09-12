@@ -194,6 +194,8 @@ function CryptoPaymentReturnContent() {
           Send exactly the amount below to the address. Your reading unlocks automatically once the blockchain confirms.
         </p>
 
+        {payAddr ? (
+        <>
         <div className="rounded-xl border-2 border-imperial-gold/40 bg-imperial-purple/30 p-6 mb-6">
           {/* Amount */}
           <div className="text-center mb-6">
@@ -277,6 +279,14 @@ function CryptoPaymentReturnContent() {
             <li>This page will automatically detect the payment and load your reading</li>
           </ol>
         </div>
+        </>
+        ) : (
+          <div className="rounded-xl border-2 border-imperial-gold/40 bg-imperial-purple/30 p-6 mb-6 text-center text-imperial-parchment/70 text-sm">
+            🔗 Complete the payment on the checkout page that opened when you clicked
+            &quot;Pay with Crypto&quot;. This page will detect your payment automatically
+            and load your reading — keep this tab open.
+          </div>
+        )}
 
         <div className="text-center">
           <div className={`inline-block px-4 py-2 rounded-full text-sm ${status === 'redirecting' ? 'bg-green-600 text-white' : 'bg-imperial-gold/20 text-imperial-gold animate-pulse'}`}>
