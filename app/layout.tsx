@@ -98,6 +98,9 @@ export default function RootLayout({
         {/* === Pinterest Domain Verification === */}
         <meta name="p:domain_verify" content="83eee5fe76e89e4a0dcd11a94c454046" />
 
+        {/* === Cryptomus Domain Verification === */}
+        <meta name="cryptomus" content="5988eb33" />
+
         {/* === Google AdSense Auto Ads === */}
         {/* Loads the AdSense library. Must be in <head> and use async + crossOrigin="anonymous". */}
         <Script
