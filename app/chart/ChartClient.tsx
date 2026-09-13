@@ -213,7 +213,7 @@ function PayCard({
     }
   }
 
-  async function handleCryptoCheckout() {
+  async function handleCryptoCheckout(payCurrency: string) {
     setLoading(true);
     setError(null);
     try {
@@ -221,18 +221,26 @@ function PayCard({
       const resp = await fetch(`${API_BASE}/api/crypto/create-payment`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tier, chartId }),
+        body: JSON.stringify({ tier, chartId, pay_currency: payCurrency }),
       });
       const data: any = await resp.json();
-      if (!resp.ok || !data.ok || !data.invoice_url) {
+      if (!resp.ok || !data.ok || !data.pay_address) {
         throw new Error(data.error || 'Could not start crypto payment. Please try card payment.');
       }
       sessionStorage.setItem(
         'pendingCryptoPayment',
-        JSON.stringify({ order_id: data.order_id, tier, expires_at: data.expires_at })
+        JSON.stringify({
+          order_id: data.order_id,
+          tier,
+          expires_at: data.expires_at,
+          pay_address: data.pay_address,
+          pay_amount: data.pay_amount,
+          pay_currency: data.pay_currency,
+          amount_usd: data.amount_usd,
+        })
       );
-      // Cryptomus 托管收银台:用户自选币种/网络,支付后回到 payment-return-crypto
-      window.location.href = data.invoice_url;
+      // 跳转到收款页:显示派生地址 + 二维码,链上确认后自动解锁报告
+      window.location.href = `/payment-return-crypto/?order_id=${data.order_id}&tier=${tier}`;
     } catch (err: any) {
       setError(err.message);
       setLoading(false);
@@ -286,12 +294,29 @@ function PayCard({
       >
         {loading ? 'Loading…' : '💳 Pay with Card (Stripe)'}
       </button>
+      <div className="mt-2 text-[11px] text-imperial-parchment/50 text-center">
+        — or pay with crypto (stablecoin, 1:1 USD) —
+      </div>
       <button
-        onClick={handleCryptoCheckout}
+        onClick={() => handleCryptoCheckout('usdt_trc20')}
         disabled={loading}
         className="mt-2 w-full text-sm px-4 py-2.5 rounded-lg border border-imperial-gold/40 text-imperial-gold hover:bg-imperial-gold/10 transition-colors disabled:opacity-50"
       >
-        {loading ? 'Loading…' : '🪙 Pay with Crypto (USDT, BTC, ETH…)'}
+        🪙 USDT — Tron (TRC20)
+      </button>
+      <button
+        onClick={() => handleCryptoCheckout('usdt_arb')}
+        disabled={loading}
+        className="mt-2 w-full text-sm px-4 py-2.5 rounded-lg border border-imperial-gold/40 text-imperial-gold hover:bg-imperial-gold/10 transition-colors disabled:opacity-50"
+      >
+        🪙 USDT — Arbitrum One
+      </button>
+      <button
+        onClick={() => handleCryptoCheckout('usdc_arb')}
+        disabled={loading}
+        className="mt-2 w-full text-sm px-4 py-2.5 rounded-lg border border-imperial-gold/40 text-imperial-gold hover:bg-imperial-gold/10 transition-colors disabled:opacity-50"
+      >
+        🪙 USDC — Arbitrum One
       </button>
       {error && (
         <div className="mt-2 text-xs text-red-400">{error}</div>

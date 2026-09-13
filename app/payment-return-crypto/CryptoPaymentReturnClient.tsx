@@ -6,6 +6,14 @@ import Link from 'next/link';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'https://api.purplestar.cc';
 
+// 币种展示元数据(方案 2.5:派生地址 + 稳定币直收)
+const CURRENCY_META: Record<string, { token: string; network: string; walletHint: string }> = {
+  usdt_trc20: { token: 'USDT', network: 'Tron (TRC20)', walletHint: 'Tron' },
+  usdt_arb: { token: 'USDT', network: 'Arbitrum One', walletHint: 'Ethereum / Arbitrum' },
+  usdc_arb: { token: 'USDC', network: 'Arbitrum One', walletHint: 'Ethereum / Arbitrum' },
+  xrp: { token: 'XRP', network: 'XRP Ledger', walletHint: 'XRP' },
+};
+
 interface PendingCrypto {
   order_id: string;
   pay_address?: string;
@@ -24,7 +32,30 @@ function CryptoPaymentReturnContent() {
   const [pending, setPending] = useState<PendingCrypto | null>(null);
   const [blockchainStatus, setBlockchainStatus] = useState<string>('waiting');
   const [secondsLeft, setSecondsLeft] = useState<number>(1200); // 20 min default
+  const [claimTxid, setClaimTxid] = useState('');
+  const [claimState, setClaimState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [claimMsg, setClaimMsg] = useState('');
   const pollTimerRef = useRef<any>(null);
+
+  const meta = CURRENCY_META[pending?.pay_currency || 'usdt_trc20'] || CURRENCY_META.usdt_trc20;
+
+  async function submitClaim() {
+    if (!pending?.order_id || !claimTxid.trim()) return;
+    setClaimState('sending');
+    try {
+      const resp = await fetch(`${API_BASE}/api/crypto/claim`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ order_id: pending.order_id, txid: claimTxid.trim() }),
+      });
+      const data: any = await resp.json();
+      if (!resp.ok || !data.ok) throw new Error(data.error || 'Failed to submit claim');
+      setClaimState('sent');
+    } catch (err: any) {
+      setClaimState('error');
+      setClaimMsg(err.message);
+    }
+  }
 
   // Load pending payment info from URL or sessionStorage
   useEffect(() => {
@@ -201,7 +232,7 @@ function CryptoPaymentReturnContent() {
           <div className="text-center mb-6">
             <div className="text-imperial-parchment/60 text-xs uppercase tracking-wider mb-1">Amount Due</div>
             <div className="font-display text-5xl text-imperial-gold mb-1">
-              {payAmt} <span className="text-2xl">{payCcy}</span>
+              {payAmt} <span className="text-2xl">{meta.token}</span>
             </div>
             <div className="text-imperial-parchment/50 text-xs">
               ≈ ${pending?.amount_usd?.toFixed(2) || '—'} USD · Order ID: {pending?.order_id?.slice(0, 8)}…
@@ -227,7 +258,7 @@ function CryptoPaymentReturnContent() {
           {payAddr && (
             <div className="mb-4">
               <div className="text-imperial-parchment/60 text-xs uppercase tracking-wider mb-2 text-center">
-                Send to this {pending?.pay_currency === 'usdt_trc20' ? 'Tron (TRC20)' : 'XRP'} address
+                Send {meta.token} on {meta.network} to this address
               </div>
               <div className="bg-imperial-ink/60 border border-imperial-gold/30 rounded-lg p-3 flex items-center gap-2">
                 <code className="flex-1 text-imperial-parchment text-xs break-all font-mono">
@@ -241,16 +272,9 @@ function CryptoPaymentReturnContent() {
                   Copy
                 </button>
               </div>
-              {pending?.pay_currency === 'xrp' && (
-                <p className="text-imperial-parchment/50 text-xs mt-2 text-center">
-                  ⚠ Include the <strong>Destination Tag</strong> if your wallet asks for one (Memo field). Tag: <strong>none needed</strong> for this payment.
-                </p>
-              )}
-              {pending?.pay_currency === 'usdt_trc20' && (
-                <p className="text-imperial-parchment/50 text-xs mt-2 text-center">
-                  ⚠ Network: <strong>Tron (TRC20)</strong> only. Sending USDT on a different chain (ERC20, BEP20, etc.) will result in permanent loss of funds.
-                </p>
-              )}
+              <p className="text-imperial-parchment/50 text-xs mt-2 text-center">
+                ⚠ Network: <strong>{meta.network}</strong> only. This address accepts {meta.token} on that network exclusively — sending other tokens or using a different network will result in permanent loss of funds.
+              </p>
             </div>
           )}
 
@@ -269,12 +293,12 @@ function CryptoPaymentReturnContent() {
         <div className="text-imperial-parchment/70 text-sm space-y-2 mb-6">
           <div className="font-semibold text-imperial-gold mb-2">How to pay:</div>
           <ol className="list-decimal pl-5 space-y-1.5">
-            <li>Open your {pending?.pay_currency === 'usdt_trc20' ? 'Tron' : 'XRP'} wallet (Trust Wallet, Ledger, Exodus, Uphold, etc.)</li>
+            <li>Open your {meta.walletHint} wallet (Trust Wallet, Ledger, Exodus, Uphold, etc.)</li>
             <li>Paste the address above or scan the QR code</li>
-            <li>Send <strong>exactly {payAmt} {payCcy}</strong> (smallest deviation may delay confirmation)</li>
+            <li>Send <strong>exactly {payAmt} {meta.token}</strong> (payments of less than the amount due cannot unlock the reading)</li>
             <li>
               Wait for blockchain confirmation (usually{' '}
-              {pending?.pay_currency === 'usdt_trc20' ? '60-180 seconds on Tron' : '30-90 seconds on XRP'})
+              {pending?.pay_currency === 'usdt_trc20' ? '60-180 seconds on Tron' : 'under a minute on Arbitrum'})
             </li>
             <li>This page will automatically detect the payment and load your reading</li>
           </ol>
@@ -298,6 +322,36 @@ function CryptoPaymentReturnContent() {
             You can close this tab and return later — we'll email your reading once confirmed.
           </p>
         </div>
+
+        {/* TXID 手动申报 — 链上自动核对万一漏单时的人工通道 */}
+        {status === 'polling' && claimState !== 'sent' && (
+          <details className="mt-2 max-w-2xl w-full text-sm text-imperial-parchment/70">
+            <summary className="cursor-pointer text-imperial-gold/80">
+              Already paid but not detected? Submit your transaction hash
+            </summary>
+            <div className="mt-3 flex gap-2">
+              <input
+                value={claimTxid}
+                onChange={(e) => setClaimTxid(e.target.value)}
+                placeholder="Transaction hash (TXID)"
+                className="flex-1 bg-imperial-ink/60 border border-imperial-gold/30 rounded-lg p-2.5 text-xs text-imperial-parchment font-mono"
+              />
+              <button
+                onClick={submitClaim}
+                disabled={claimState === 'sending' || !claimTxid.trim()}
+                className="px-4 py-2 rounded-lg border border-imperial-gold/40 text-imperial-gold text-xs hover:bg-imperial-gold/10 disabled:opacity-50 shrink-0"
+              >
+                {claimState === 'sending' ? 'Sending…' : 'Submit'}
+              </button>
+            </div>
+            {claimState === 'error' && <p className="text-red-400 text-xs mt-2">{claimMsg}</p>}
+          </details>
+        )}
+        {claimState === 'sent' && (
+          <p className="mt-2 max-w-2xl w-full text-center text-green-400 text-xs">
+            ✓ Claim submitted — we'll verify your transaction on-chain and unlock your reading shortly.
+          </p>
+        )}
       </div>
     </main>
   );
