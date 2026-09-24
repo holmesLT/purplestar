@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'How to Read a Ziwei Doushu Chart: Step-by-Step Guide for Beginners',
-  description: 'Learn to read a Ziwei Doushu birth chart in 5 steps: palaces, main stars, and the Four Transformations, explained for your life.',
-  keywords: ['how to read ziwei doushu', 'ziwei chart reading', 'purple star astrology chart explained', 'ziwei chart for beginners'],
+   title: 'How to Read & Calculate a Ziwei Doushu Chart: Step-by-Step Guide',
+   description: 'Learn to read and calculate a Ziwei Doushu chart step by step: palaces, main stars, and the Four Transformations, plus how the chart is calculated.',
+   keywords: ['how to read ziwei doushu', 'how to calculate ziwei doushu chart', 'ziwei doushu calculation', 'ziwei chart reading', 'purple star astrology chart explained', 'ziwei chart for beginners'],
   openGraph: {
-    title: 'How to Read a Ziwei Doushu Chart',
-    description: 'A beginner-friendly walkthrough of the Ziwei Doushu birth chart.',
+     title: 'How to Read & Calculate a Ziwei Doushu Chart',
+     description: 'A beginner-friendly walkthrough — reading steps plus how the chart is calculated.',
     type: 'article',
     url: 'https://purplestar.cc/learn/how-to-read-purple-star-astrology-chart/',
     siteName: 'PurpleStar',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'How to Read a Ziwei Doushu Chart',
-    description: 'A beginner-friendly walkthrough of the Ziwei Doushu birth chart.',
+     title: 'How to Read & Calculate a Ziwei Doushu Chart',
+     description: 'A beginner-friendly walkthrough — reading steps plus how the chart is calculated.',
     images: ['https://purplestar.cc/og-image.png'],
   },
   alternates: { canonical: 'https://purplestar.cc/learn/how-to-read-purple-star-astrology-chart/' },
@@ -46,7 +46,7 @@ export default function Article() {
       <article className="purple-card rounded-2xl p-8 md:p-12">
         <header className="mb-8">
           <div className="text-xs tracking-[0.3em] text-imperial-gold uppercase mb-2">Beginner Guide</div>
-          <h1 className="font-display text-4xl md:text-5xl mb-4">How to Read a Ziwei Doushu Chart: A Step-by-Step Guide</h1>
+           <h1 className="font-display text-4xl md:text-5xl mb-4">How to Read and Calculate a Ziwei Doushu Chart: A Step-by-Step Guide</h1>
           <p className="text-imperial-parchment/70 text-lg">Ziwei Doushu looks intimidating at first — twelve squares, dozens of stars. After this guide, you'll know exactly where to look first.</p>
         </header>
 
@@ -58,6 +58,7 @@ export default function Article() {
             <li>What the 14 main stars mean</li>
             <li>How the Four Transformations shift meaning</li>
             <li>How to read your chart as a story, not a list</li>
+             <li>How a Ziwei chart is calculated from your birth data</li>
           </ol>
         </div>
 
@@ -136,6 +137,21 @@ export default function Article() {
           The reading: a natural leader with financial strength, destined for a public role, but who must learn patience in love. That's a story — not a forecast of doom, and not a fairy tale either.
         </p>
 
+         <h2 className="font-display text-3xl mt-10 mb-4 text-imperial-gold">How is a Ziwei Doushu chart calculated?</h2>
+         <p className="mb-4 leading-relaxed">
+           Reading and calculating a Ziwei chart are two different jobs — and you only need the first one. But if you've wondered how to calculate a Ziwei Doushu chart step by step, here is the pipeline every chart calculator follows:
+         </p>
+         <ol className="list-decimal list-inside mb-4 space-y-1 text-imperial-parchment/90">
+           <li><strong>Your birth data goes in</strong> — birth date, birth time, and gender are the only inputs.</li>
+           <li><strong>Conversion to the Chinese calendar</strong> — the date converts to its lunar equivalent, producing a Heavenly Stem (甲–癸) and Earthly Branch (子–亥) pair.</li>
+           <li><strong>The Life Palace is located</strong> — the birth month and hour branch fix which of the twelve squares becomes the Life Palace.</li>
+           <li><strong>The 14 main stars are placed</strong> — the Ziwei (Emperor) star's position is computed from the Life Palace's day stem, and the other 13 stars fall into fixed relative positions.</li>
+           <li><strong>The Four Transformations fly in</strong> — the birth year's stem assigns Lu, Quan, Ke, and Ji to specific stars, activating them.</li>
+         </ol>
+         <p className="mb-4 leading-relaxed">
+           That's the full Ziwei Doushu calculation. Done by hand it takes a practiced astrologer 20–30 minutes — <Link href="/" className="text-imperial-gold hover:underline">PurpleStar's free calculator</Link> does it in about three seconds, so you can spend your time on the fun part: reading the story.
+         </p>
+ 
         <h2 className="font-display text-3xl mt-10 mb-4 text-imperial-gold">What you should NOT do</h2>
         <p className="mb-4 leading-relaxed">
           Avoid the common beginner traps:
@@ -173,7 +189,7 @@ export default function Article() {
         },
         url: 'https://purplestar.cc/learn/how-to-read-purple-star-astrology-chart/',
         datePublished: '2026-08-12',
-        dateModified: '2026-08-15',
+         dateModified: '2026-09-25',
         author: {
           '@type': 'Organization',
           name: 'PurpleStar',
@@ -184,7 +200,7 @@ export default function Article() {
           name: 'PurpleStar',
           url: 'https://purplestar.cc',
         },
-        keywords: 'how to read ziwei chart, ziwei doushu beginner, purple star astrology tutorial',
+         keywords: 'how to read ziwei chart, how to calculate ziwei doushu chart, ziwei doushu beginner, purple star astrology tutorial',
         inLanguage: 'en-US',
         about: [
           { '@type': 'Thing', name: 'Ziwei Doushu' },
@@ -204,6 +220,14 @@ export default function Article() {
               text: 'Start with these 5 steps: (1) Understand the 4x3 grid shape with 12 palaces. (2) Find your Life Palace — it shows your main star and core personality. (3) Find your Body Palace — it shows how you actually live. (4) Identify your main star (Ziwei, Tianji, Wuqu, etc.) — each has a distinct archetype. (5) Look at the Four Transformations (Lu, Quan, Ke, Ji) flying through your chart — they show what energy is currently active.',
             },
           },
+           {
+             '@type': 'Question',
+             name: 'How do you calculate a Ziwei Doushu chart?',
+             acceptedAnswer: {
+               '@type': 'Answer',
+               text: 'A Ziwei Doushu chart is calculated from your birth date, birth time, and gender. The date converts to a Chinese stem-branch pair, the birth month and hour fix the Life Palace position, the 14 main stars are placed relative to the computed Ziwei star position, and the year stem assigns the Four Transformations (Lu, Quan, Ke, Ji). By hand this takes 20-30 minutes; a free online Ziwei calculator like PurpleStar generates the full chart in seconds.',
+             },
+           },
           {
             '@type': 'Question',
             name: 'What is the Life Palace in Ziwei Doushu?',

@@ -97,7 +97,7 @@ export default function Article() {
         <h3 className="font-display text-2xl mt-8 mb-3 text-imperial-gold">9. Property Palace (田宅) — your home</h3>
         <p className="mb-4 leading-relaxed">Real estate, household stability, family roots. The energy here tells you how settled or restless your domestic life will be.</p>
 
-        <h3 className="font-display text-2xl mt-8 mb-3 text-imperial-gold">10. Fortune Palace (福德) — your inner life</h3>
+         <h3 className="font-display text-2xl mt-8 mb-3 text-imperial-gold">10. Fortune Palace (福德, also called the Happiness Palace) — your inner life</h3>
         <p className="mb-4 leading-relaxed">Spirituality, mental state, hobbies, and inner peace. The star here shapes how you recharge and what brings you joy.</p>
 
         <h3 className="font-display text-2xl mt-8 mb-3 text-imperial-gold">11. Parents Palace (父母) — your upbringing</h3>

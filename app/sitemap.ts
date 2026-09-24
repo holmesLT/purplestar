@@ -44,7 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...learnPages.map(({ slug, priority }) => ({
       url: `${baseUrl}/learn/${slug}/`,
-      lastModified: articlesLastmod,
+       lastModified: slug === 'how-to-read-purple-star-astrology-chart' ? new Date('2026-09-25T00:00:00.000Z') : articlesLastmod,
       changeFrequency: 'monthly' as const,
       priority,
     })),
