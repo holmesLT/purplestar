@@ -164,6 +164,15 @@ export default function RootLayout({
             __html: `(adsbygoogle = window.adsbygoogle || []).push({ google_ad_client: "${ADSENSE_PUBLISHER_ID}", enable_page_level_ads: true });`,
           }}
         />
+
+        {/* === Cloudflare Web Analytics beacon === */}
+        {/* Manual install (zone RUM = enable_manual). Token from Web Analytics → purplestar.cc.
+            Placement per CF docs: before </body> on all HTML pages. */}
+        <script
+          type="module"
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "a31c4549a60b43d997923ef111f67e85"}'
+        />
       </body>
     </html>
   );
